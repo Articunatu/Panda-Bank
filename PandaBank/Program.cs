@@ -7,6 +7,7 @@ namespace PandaBank
         static void Main()
         {
             Console.WriteLine(" ");
+            int moneyAmount;
         }
     }
 }
