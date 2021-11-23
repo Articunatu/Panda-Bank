@@ -7,7 +7,12 @@ namespace PandaBank
         static void Main()
         {
             Console.WriteLine(" ");
-            int moneyAmount;
+            int money = 1;
+            switch (money)
+            {
+                case 1: Console.WriteLine(); break; 
+                default: break;
+            }
         }
     }
 }
