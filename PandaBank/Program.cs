@@ -7,33 +7,42 @@ namespace PandaBank
     {
         static void Main()
         {
-            //Login L = new Login();
-            //L._loginUs();
             LoginUs();
-
         }
-
         private static void SignInMetod()
         {
-
-            Console.WriteLine(" ");
+            bool Online = true;
+            while (Online)
+            {
+                Console.WriteLine();
+            Console.WriteLine("PandaBanken");
             int money;
-            Console.WriteLine("[1] Show Accounts");
-            Console.WriteLine("[2] Tranfer Money between accounts");
-            Console.WriteLine("[3] Tranfer Money between users");
-            Console.WriteLine("[4] Create Account");
-            Console.WriteLine("[5] Deposit Money");
-            Console.WriteLine("[6] Withdraw Money");
-            Console.WriteLine("[7] Borrow Money");
-            Console.WriteLine("[8] Log out");
+            Console.WriteLine("[1] Visa Konton");
+            Console.WriteLine("[2] Överför Pengar Mellan Konton");
+            Console.WriteLine("[3] Överför Pengar Till Andra Användare");
+            Console.WriteLine("[4] Skapa Konto");
+            Console.WriteLine("[5] Sätt In Pengar");
+            Console.WriteLine("[6] Ta Ut Pengar");
+            Console.WriteLine("[7] Låna Pengar");
+            Console.WriteLine("[8] Logga Ut");
             Console.Write("");
             Int32.TryParse(Console.ReadLine(), out money);
             Console.WriteLine();
 
             switch (money)
             {
-                case 1: Console.WriteLine(); break;
-                default: break;
+                case 1: Console.WriteLine();
+                        Accounts A = new Accounts("Spar", 17698);
+                        Accounts A1 = new Accounts("Lön Konto",4586);
+                      
+                        Customer C = new Customer();
+                        C.AddAccounts(A);
+                        C.AddAccounts(A1);
+                        C.ShoweAccounts(); 
+                        Console.ReadKey();
+                    ; break;
+                default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
+            }
             }
         }
         private static void LoginUs()
