@@ -50,22 +50,29 @@ namespace PandaBank
             bool logintry = true;
             while (logintry)
             {
-                Console.Write("Användarnamn: ");
-                string userAnswer = Console.ReadLine();
-                Console.Write("Lösenord: ");
-                string userPass = Console.ReadLine();
-
-                LoginUser result = ListUser.Find(a => a.userName == userAnswer);
-                LoginUser result1 = ListUser.Find(p => p.password == userPass);
-                if (result == null || result1 == null)
+                for (int i = 0; i <= 2; i++)
                 {
-                    Console.WriteLine("Fel användarnamn eller lösenord");
-                }
-                else
-                {
-                    SignInMetod();
-                }
+                    Console.Write("Användarnamn: ");
+                    string userAnswer = Console.ReadLine();
+                    Console.Write("Lösenord: ");
+                    string userPass = Console.ReadLine();
 
+                    LoginUser result = ListUser.Find(a => a.userName == userAnswer);
+                    LoginUser result1 = ListUser.Find(p => p.password == userPass);
+                    if (result == null || result1 == null)
+                    {
+                        Console.WriteLine("Fel användarnamn eller lösenord");
+                        if (i == 2)
+                        {
+                            Console.WriteLine("Du har nått maxgräns försök!");
+                            Environment.Exit(0);
+                        }
+                    }
+                    else
+                    {
+                        SignInMetod();
+                    }
+                }
             }
         }
     }
