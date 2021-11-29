@@ -36,7 +36,7 @@ namespace PandaBank
                     string userPass = Console.ReadLine();
 
                     LoginUser result = ListUser.Find(a => a.userName == userAnswer);
-                    LoginUser result1 = ListUser.Find(p => p.password == userPass);
+                    LoginUser result1 = ListUser.Find(p => result.password == userPass);
                     if (result == null || result1 == null)
                     {
                         Console.WriteLine("Fel användarnamn eller lösenord");
