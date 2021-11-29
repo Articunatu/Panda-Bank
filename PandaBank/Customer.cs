@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PandaBank
 {
@@ -13,11 +12,10 @@ namespace PandaBank
             ListOfAccounts.Add(_Account);
         }
 
-        public Customer(List<Accounts> _ListofAccounts, string _userName, string _password)
+        public Customer(string _userName, string _password)
         {
             userName = _userName;
             password = _password;
-            ListOfAccounts = _ListofAccounts;
         }
 
         public void ShoweAccounts()
@@ -60,8 +58,24 @@ namespace PandaBank
                 throw;
             }
 
+            while(moneyamount > account._Balance)
+            {
+                Console.WriteLine("Det finns för lite pengar på kontot...\nSkriv in ett nytt belopp:");
+                try
+                {
+                    moneyamount = int.Parse(Console.ReadLine());
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Ogiltigt format!");
+                    TransferAccounts();
+                }
+            }
+
             account._Balance -= moneyamount;
             account2._Balance += moneyamount;
+
             Console.WriteLine("Uppdaterad info:");
             account.PrintInfo();
             account2.PrintInfo();
