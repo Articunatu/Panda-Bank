@@ -7,24 +7,26 @@ namespace PandaBank
     {
         static void Main()
         {
-            LoginUs();
+            Admin a = new Admin();
+            LoginUs(a);
         }
 
-        private static void LoginUs()
+        private static void LoginUs(Admin a)
         {
             LoginUser Ad = new Customer("Admin", "1234");
             Customer U1 = new Customer("Hanna", "0000");
             Customer U2 = new Customer("Daniel", "1111");
 
-            List<LoginUser> ListUser = new List<LoginUser>();
             Accounts a1 = new Accounts("Spar", 44000);
             Accounts a2 = new Accounts("Lön", 22998);
             Accounts a3 = new Accounts("Fond", 33711);
+
+            List<Customer> ListOfCustomers = a.ListOfCustomers;
+
             U1.AddAccounts(a1); U1.AddAccounts(a2); //First user's accounts
             U2.AddAccounts(a3);       //Second user's account
-            ListUser.Add(U1);
-            ListUser.Add(U2);
-
+            ListOfCustomers.Add(U1);
+            ListOfCustomers.Add(U2);
             bool logintry = true;
             while (logintry)
             {
@@ -35,8 +37,8 @@ namespace PandaBank
                     Console.Write("Lösenord: ");
                     string userPass = Console.ReadLine();
 
-                    LoginUser result = ListUser.Find(a => a.userName == userAnswer);
-                    LoginUser result1 = ListUser.Find(p => result.password == userPass);
+                    LoginUser result = ListOfCustomers.Find(result => result.userName == userAnswer);
+                    LoginUser result1 = ListOfCustomers.Find(result => result.password == userPass);
                     if (result == null || result1 == null)
                     {
                         Console.WriteLine("Fel användarnamn eller lösenord");
@@ -49,14 +51,15 @@ namespace PandaBank
                     else
                     {
                         Customer resultCust = (Customer)result;
-                        SignInMetod(resultCust);
+                        SignInMetod(resultCust, ListOfCustomers);
                     }
                 }
             }
         }
 
-        private static void SignInMetod(Customer loginUser)
+        private static void SignInMetod(Customer loginUser, List<Customer> customers)
         {
+            Admin a = new Admin();
             bool Online = true;
             while (Online)
             {
@@ -82,6 +85,17 @@ namespace PandaBank
 
                         Console.ReadKey();
                         break;
+                    case 2:
+                        a.CreateCustomer();
+
+                        Console.ReadKey();
+                        break;
+                    case 3:
+                        LoginUs(a);
+
+                        Console.ReadKey();
+                        break;
+
                     default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
                 }
             }
