@@ -9,50 +9,19 @@ namespace PandaBank
         {
             LoginUs();
         }
-        private static void SignInMetod()
-        {
-            bool Online = true;
-            while (Online)
-            {
-                Console.WriteLine();
-            Console.WriteLine("PandaBanken");
-            int money;
-            Console.WriteLine("[1] Visa Konton");
-            Console.WriteLine("[2] Överför Pengar Mellan Konton");
-            Console.WriteLine("[3] Överför Pengar Till Andra Användare");
-            Console.WriteLine("[4] Skapa Konto");
-            Console.WriteLine("[5] Sätt In Pengar");
-            Console.WriteLine("[6] Ta Ut Pengar");
-            Console.WriteLine("[7] Låna Pengar");
-            Console.WriteLine("[8] Logga Ut");
-            Console.Write("");
-            Int32.TryParse(Console.ReadLine(), out money);
-            Console.WriteLine();
 
-            switch (money)
-            {
-                case 1: Console.WriteLine();
-                        Accounts A = new Accounts("Spar", 17698);
-                        Accounts A1 = new Accounts("Lön Konto",4586);
-                      
-                        Customer C = new Customer();
-                        C.AddAccounts(A);
-                        C.AddAccounts(A1);
-                        C.ShoweAccounts(); 
-                        Console.ReadKey();
-                    ; break;
-                default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
-            }
-            }
-        }
         private static void LoginUs()
         {
-            LoginUser Ad = new LoginUser() { userName = "Admin", password = "1234" };
-            LoginUser U1 = new LoginUser() { userName = "Hanna", password = "0000" };
-            LoginUser U2 = new LoginUser() { userName = "Daniel", password = "1111" };
+            LoginUser Ad = new Customer("Admin", "1234");
+            Customer U1 = new Customer("Hanna", "0000");
+            Customer U2 = new Customer("Daniel", "1111");
 
             List<LoginUser> ListUser = new List<LoginUser>();
-            ListUser.Add(Ad);
+            Accounts a1 = new Accounts("Spar", 44000);
+            Accounts a2 = new Accounts("Lön", 22998);
+            Accounts a3 = new Accounts("Fond", 33711);
+            U1.AddAccounts(a1); U1.AddAccounts(a2); //First user's accounts
+            U2.AddAccounts(a3);       //Second user's account
             ListUser.Add(U1);
             ListUser.Add(U2);
 
@@ -79,8 +48,41 @@ namespace PandaBank
                     }
                     else
                     {
-                        SignInMetod();
+                        Customer resultCust = (Customer)result;
+                        SignInMetod(resultCust);
                     }
+                }
+            }
+        }
+
+        private static void SignInMetod(Customer loginUser)
+        {
+            bool Online = true;
+            while (Online)
+            {
+                Console.WriteLine();
+                Console.WriteLine("PandaBanken");
+                int money;
+                Console.WriteLine("[1] Visa Konton");
+                Console.WriteLine("[2] Överför Pengar Mellan Konton");
+                Console.WriteLine("[3] Överför Pengar Till Andra Användare");
+                Console.WriteLine("[4] Skapa Konto");
+                Console.WriteLine("[5] Sätt In Pengar");
+                Console.WriteLine("[6] Ta Ut Pengar");
+                Console.WriteLine("[7] Låna Pengar");
+                Console.WriteLine("[8] Logga Ut");
+                Console.Write("");
+                Int32.TryParse(Console.ReadLine(), out money);
+                Console.WriteLine();
+
+                switch (money)
+                {
+                    case 1:
+                        loginUser.ShoweAccounts();
+
+                        Console.ReadKey();
+                        break;
+                    default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
                 }
             }
         }
