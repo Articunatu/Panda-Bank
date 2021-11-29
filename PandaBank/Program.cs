@@ -91,7 +91,7 @@ namespace PandaBank
                         Console.ReadKey();
                         break;
                     case 3:
-                        LoginUs(a);
+                        loginUser.TransferMoneyToUser(customers);
 
                         Console.ReadKey();
                         break;
