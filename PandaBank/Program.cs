@@ -7,26 +7,19 @@ namespace PandaBank
     {
         static void Main()
         {
+            Start();
+        }   
+
+        static void Start()
+        {
             Admin a = new Admin();
-            LoginUs(a);
+            a.AdminSetup();
+            List<Customer> ListOfCustomers = a.ListOfCustomers;
+            LoginUs(a, ListOfCustomers);
         }
 
-        private static void LoginUs(Admin a)
+        private static void LoginUs(Admin a, List<Customer> ListOfCustomers)
         {
-            LoginUser Ad = new Customer("Admin", "1234");
-            Customer U1 = new Customer("Hanna", "0000");
-            Customer U2 = new Customer("Daniel", "1111");
-
-            Accounts a1 = new Accounts("Spar", 44000);
-            Accounts a2 = new Accounts("Lön", 22998);
-            Accounts a3 = new Accounts("Fond", 33711);
-
-            List<Customer> ListOfCustomers = a.ListOfCustomers;
-
-            U1.AddAccounts(a1); U1.AddAccounts(a2); //First user's accounts
-            U2.AddAccounts(a3);       //Second user's account
-            ListOfCustomers.Add(U1);
-            ListOfCustomers.Add(U2);
             bool logintry = true;
             while (logintry)
             {
@@ -36,6 +29,12 @@ namespace PandaBank
                     string userAnswer = Console.ReadLine();
                     Console.Write("Lösenord: ");
                     string userPass = Console.ReadLine();
+
+                    if (userAnswer == "Admin" || userPass == "3.14")
+                    {
+                        SignInAdmin(a, ListOfCustomers);
+                        break;
+                    }
 
                     LoginUser result = ListOfCustomers.Find(result => result.userName == userAnswer);
                     LoginUser result1 = ListOfCustomers.Find(result => result.password == userPass);
@@ -51,15 +50,14 @@ namespace PandaBank
                     else
                     {
                         Customer resultCust = (Customer)result;
-                        SignInMetod(resultCust, ListOfCustomers);
+                        SignInMetod(a, resultCust, ListOfCustomers);
                     }
                 }
             }
         }
 
-        private static void SignInMetod(Customer loginUser, List<Customer> customers)
+        private static void SignInMetod(Admin a, Customer loginUser, List<Customer> customers)
         {
-            Admin a = new Admin();
             bool Online = true;
             while (Online)
             {
@@ -82,22 +80,47 @@ namespace PandaBank
                 {
                     case 1:
                         loginUser.ShoweAccounts();
-
                         Console.ReadKey();
                         break;
                     case 2:
-                        a.CreateCustomer();
-
+                        loginUser.ShoweAccounts();
+                        loginUser.TransferAccounts();
                         Console.ReadKey();
                         break;
                     case 3:
                         loginUser.TransferMoneyToUser(customers);
-
                         Console.ReadKey();
                         break;
-
+                    case 8:
+                        LoginUs(a, customers);
+                        break;
                     default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
                 }
+            }
+        }
+
+        private static void SignInAdmin(Admin a, List<Customer> customers)
+        {
+            Console.WriteLine("Välkommen Admin, vad vill du göra?");
+            Console.WriteLine("[1] Se en lista över alla användare");
+            Console.WriteLine("[2] Skapa en nya användare");
+            Console.WriteLine("[3] Överför Pengar Till Andra Användare");
+
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    a.ShowCustomers();
+                    break;
+                case 2:
+                    a.CreateCustomer();
+                    break;
+                case 8:
+                    LoginUs(a, customers);
+                    break;
+                default:
+                    break;
             }
         }
     }
