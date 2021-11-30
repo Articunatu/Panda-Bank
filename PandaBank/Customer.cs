@@ -80,7 +80,7 @@ namespace PandaBank
             account.PrintInfo();
             account2.PrintInfo();
         }
-        public void TransferMoneyToUser(List<Customer>ListUser)
+        public void TransferMoneyToUser(List<Customer> ListUser)
         {
             Console.WriteLine("Välj ett konto att överföra pengar från: ");
             Console.WriteLine(" ");
@@ -95,39 +95,36 @@ namespace PandaBank
 
             Console.Write("Skriv användare att skicka pengar till: ");
             string toUser = Console.ReadLine();
-            LoginUser toUser2 = ListUser.Find(u => u.userName == toUser);
+            Customer toUser2 = ListUser.Find(u => u.userName == toUser);
             while (toUser2 == null)
             {
                 fromAccount = Console.ReadLine();
             }
             Console.WriteLine("Välj konto att skicka till");
-                Console.WriteLine("");
-           // ShoweAccounts();
-                Console.Write("Konto: ");
-                string toAcc = Console.ReadLine();
-                Accounts toAccount = ListOfAccounts.Find(s => s._Name == toAcc);
+            Console.WriteLine("");
+            toUser2.ShoweAccounts();
+            Console.Write("Konto: ");
+            string toAcc = Console.ReadLine();
+            Accounts toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             while (toAccount == null)
             {
                 fromAccount = Console.ReadLine();
             }
 
             Console.Write("Välj summa att överföra: ");
-                string am = Console.ReadLine();
-                int amount = Convert.ToInt32(am);
-                if (amount > fromAcc._Balance)
-                {
-                    Console.Write("Otillräckligt belopp på konto! Vänligen välj nytt belopp: ");
-                }
-                else
-                {
-                    fromAcc._Balance -= amount;
-                    toAccount._Balance += amount;
+            int amount = Int32.Parse(Console.ReadLine());
+            if (amount > fromAcc._Balance)
+            {
+                Console.Write("Otillräckligt belopp på konto! Vänligen välj nytt belopp: ");
+            }
+            else
+            {
+                fromAcc._Balance -= amount;
+                toAccount._Balance += amount;
 
-                    Console.WriteLine($"Nuvarande belopp: ");
-                    fromAcc.PrintInfo();
-                }
-            
-
+                Console.WriteLine($"Nuvarande belopp: ");
+                fromAcc.PrintInfo();
+            }
         }
     }
 }
