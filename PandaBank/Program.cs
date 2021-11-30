@@ -8,7 +8,7 @@ namespace PandaBank
         static void Main()
         {
             Start();
-        }   
+        }
 
         static void Start()
         {
@@ -81,18 +81,27 @@ namespace PandaBank
                     case 1:
                         loginUser.ShoweAccounts();
                         Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 2:
                         loginUser.ShoweAccounts();
                         loginUser.TransferAccounts();
                         Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 3:
                         loginUser.TransferMoneyToUser(customers);
                         Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case 4:
+                        loginUser.CreateAccount();
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     case 8:
                         LoginUs(a, customers);
+                        Console.Clear();
                         break;
                     default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
                 }

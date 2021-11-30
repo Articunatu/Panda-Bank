@@ -126,5 +126,14 @@ namespace PandaBank
                 fromAcc.PrintInfo();
             }
         }
+        public void CreateAccount()
+        {
+            Console.Write("Namnge konto: ");
+            string accountName = Console.ReadLine();
+            int accountAm = 0;
+            Accounts createAccounts = new Accounts(accountName, accountAm);
+            ListOfAccounts.Add(createAccounts);
+            Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance);
+        }
     }
 }
