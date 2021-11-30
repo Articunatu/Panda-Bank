@@ -4,18 +4,21 @@ namespace PandaBank
 {
     public class Accounts
     {
-        public string _Name;
-        public float _Balance;
+        private string name;
+        private float balance;
 
-        public Accounts(string Name, float Balance)
+        public string _Name { get => name; set => name = value; }
+        public float _Balance { get => balance; set => balance = value; }
+
+        public Accounts(string _name, float _balance)
         {
-            _Name = Name;
-            _Balance = Balance;
+            name = _name;
+            balance = _balance;
         }
 
         public void PrintInfo()
         {
-            Console.WriteLine(_Name +": "+ _Balance);
+            Console.WriteLine(name + ": "+ balance);
         }
     }
 }
