@@ -33,6 +33,7 @@ namespace PandaBank
             Accounts account = ListOfAccounts.Find(s => s._Name == sendAccount);
             while (account == null)
             {
+                Console.WriteLine("Ogiltigt konto!");
                 sendAccount = Console.ReadLine();
             }
 
@@ -41,21 +42,20 @@ namespace PandaBank
             Accounts account2 = ListOfAccounts.Find(r => r._Name == recieveAccount);
             while (account2 == null)
             {
-                sendAccount = Console.ReadLine();
+                Console.WriteLine("Ogiltigt konto!");
+                recieveAccount = Console.ReadLine();
             }
 
             Console.WriteLine("Hur mycket pengar vill du föra över?");
-            int moneyamount;
-
+            float moneyamount = 0;
             try
             {
-                moneyamount = int.Parse(Console.ReadLine());
-
+                moneyamount = float.Parse(Console.ReadLine());
             }
             catch (Exception)
             {
                 Console.WriteLine("Ogiltigt format!");
-                throw;
+                TransferAccounts();
             }
 
             while (moneyamount > account._Balance)
@@ -63,7 +63,7 @@ namespace PandaBank
                 Console.WriteLine("Det finns för lite pengar på kontot...\nSkriv in ett nytt belopp:");
                 try
                 {
-                    moneyamount = int.Parse(Console.ReadLine());
+                    moneyamount = float.Parse(Console.ReadLine());
 
                 }
                 catch (Exception)
@@ -110,12 +110,28 @@ namespace PandaBank
             {
                 fromAccount = Console.ReadLine();
             }
-
             Console.Write("Välj summa att överföra: ");
-            int amount = Int32.Parse(Console.ReadLine());
+            float amount = 0;
+            try
+            {
+                amount = float.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Ogiltigt format!");
+                TransferMoneyToUser(ListUser);
+            }
             if (amount > fromAcc._Balance)
             {
                 Console.Write("Otillräckligt belopp på konto! Vänligen välj nytt belopp: ");
+                try
+                {
+                    amount = float.Parse(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Ogiltigt format!");
+                }
             }
             else
             {
@@ -130,7 +146,7 @@ namespace PandaBank
         {
             Console.Write("Namnge konto: ");
             string accountName = Console.ReadLine();
-            int accountAm = 0;
+            float accountAm = 0;
             Accounts createAccounts = new Accounts(accountName, accountAm);
             ListOfAccounts.Add(createAccounts);
             Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance);
