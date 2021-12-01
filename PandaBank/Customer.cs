@@ -33,7 +33,9 @@ namespace PandaBank
             Accounts account = ListOfAccounts.Find(s => s._Name == sendAccount);
             while (account == null)
             {
+                Console.Write("Ogiltigt konto! Vänligen skriv in ett nytt: ");
                 sendAccount = Console.ReadLine();
+                account = ListOfAccounts.Find(s => s._Name == sendAccount);
             }
 
             Console.WriteLine("Välj sen ett konto att föra över pengar till:");
@@ -41,40 +43,48 @@ namespace PandaBank
             Accounts account2 = ListOfAccounts.Find(r => r._Name == recieveAccount);
             while (account2 == null)
             {
-                sendAccount = Console.ReadLine();
+                Console.Write("Ogiltigt konto! Vänligen skriv in ett nytt: ");
+                recieveAccount = Console.ReadLine();
+                account2 = ListOfAccounts.Find(r => r._Name == recieveAccount);
             }
 
             Console.WriteLine("Hur mycket pengar vill du föra över?");
-            int moneyamount;
-
-            try
+            float moneyamount = 0;
+            bool isException = false;
+            do
             {
-                moneyamount = int.Parse(Console.ReadLine());
-
+                try
+                {
+                    moneyamount = float.Parse(Console.ReadLine());
+                    isException = false;
+                }
+                catch (Exception)
+                {
+                    Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
+                    isException = true;
+                }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Ogiltigt format!");
-                throw;
-            }
+            while (isException);
 
             while (moneyamount > account._Balance)
             {
-                Console.WriteLine("Det finns för lite pengar på kontot...\nSkriv in ett nytt belopp:");
+                Console.Write("Det finns för lite pengar på kontot...\nSkriv in ett nytt belopp: ");
                 try
                 {
-                    moneyamount = int.Parse(Console.ReadLine());
+                    moneyamount = float.Parse(Console.ReadLine());
 
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Ogiltigt format!");
-                    TransferAccounts();
+                    Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                 }
             }
 
             account._Balance -= moneyamount;
+            account._Balance = (float)Math.Round(account._Balance, 3);
             account2._Balance += moneyamount;
+            account2._Balance = (float)Math.Round(account2._Balance, 3);
+
 
             Console.WriteLine("Uppdaterad info:");
             account.PrintInfo();
@@ -90,7 +100,9 @@ namespace PandaBank
             Accounts fromAcc = ListOfAccounts.Find(s => s._Name == fromAccount);
             while (fromAcc == null)
             {
+                Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
                 fromAccount = Console.ReadLine();
+                fromAcc = ListOfAccounts.Find(s => s._Name == fromAccount);
             }
 
             Console.Write("Skriv användare att skicka pengar till: ");
@@ -98,39 +110,65 @@ namespace PandaBank
             Customer toUser2 = ListUser.Find(u => u.userName == toUser);
             while (toUser2 == null)
             {
+                Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
                 fromAccount = Console.ReadLine();
+                toUser2 = ListUser.Find(u => u.userName == toUser);
             }
-            Console.WriteLine("Välj konto att skicka till");
-            Console.WriteLine("");
+
+            Console.WriteLine("Välj konto att skicka till\n");
             toUser2.ShoweAccounts();
             Console.Write("Konto: ");
             string toAcc = Console.ReadLine();
             Accounts toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             while (toAccount == null)
             {
+                Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
                 fromAccount = Console.ReadLine();
+                toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             }
 
             Console.Write("Välj summa att överföra: ");
-            int amount = Int32.Parse(Console.ReadLine());
-            if (amount > fromAcc._Balance)
+            float amount = 0;
+            bool isException = false;
+            do
+            {
+                try
+                {
+                    amount = float.Parse(Console.ReadLine());
+                    isException = false;
+                }
+                catch (Exception)
+                {
+                    Console.Write("Ogiltigt format! Skriv in ett nytt belopp: ");
+                    TransferMoneyToUser(ListUser);
+                    isException = true;
+                }
+            }
+            while(isException);
+
+            while (amount > fromAcc._Balance)
             {
                 Console.Write("Otillräckligt belopp på konto! Vänligen välj nytt belopp: ");
+                try
+                {
+                    amount = float.Parse(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.Write("Ogiltigt format! Vänligen välj nytt belopp: ");
+                }
             }
-            else
-            {
-                fromAcc._Balance -= amount;
-                toAccount._Balance += amount;
 
-                Console.WriteLine($"Nuvarande belopp: ");
-                fromAcc.PrintInfo();
-            }
+            fromAcc._Balance -= amount;
+            toAccount._Balance += amount;
+
+            fromAcc.PrintInfo();
         }
         public void CreateAccount()
         {
             Console.Write("Namnge konto: ");
             string accountName = Console.ReadLine();
-            int accountAm = 0;
+            float accountAm = 0;
             Accounts createAccounts = new Accounts(accountName, accountAm);
             ListOfAccounts.Add(createAccounts);
             Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance);
