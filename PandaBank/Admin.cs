@@ -28,8 +28,10 @@ namespace PandaBank
             ListOfCustomers.Add(U3);
         }
 
+
         public void ShowCustomers()
         {
+            
             foreach (var customer in ListOfCustomers)
             {
                 Console.WriteLine("Användare: " + customer.userName + ", Antal konton: " + customer.ListOfAccounts.Count);
@@ -38,12 +40,14 @@ namespace PandaBank
         
         public void CreateCustomer()
         {
+            Console.Write("Ange Användarnamnet på den nya användaren: ");
             string nameCreated = Console.ReadLine();
+            Console.Write("Ange ett Lösenordet till den nya användaren: ");
             string passwordCreated = Console.ReadLine();
             Customer createdCustomer = new Customer(nameCreated, passwordCreated);
             ListOfCustomers.Add(createdCustomer);
             
-            Console.WriteLine(createdCustomer.userName + " " + createdCustomer.password);
+            Console.WriteLine("Du har lagt till följande användare: "+createdCustomer.userName +"\nMed lösenordet: " + createdCustomer.password);
         }
     }
     //    public object A()
