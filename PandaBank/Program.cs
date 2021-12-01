@@ -73,7 +73,7 @@ namespace PandaBank
                 Console.WriteLine("[6] Ta Ut Pengar");
                 Console.WriteLine("[7] Låna Pengar");
                 Console.WriteLine("[8] Visa transaktioner");
-                Console.WriteLine("[8] Logga Ut");
+                Console.WriteLine("[9] Logga Ut");
                 Console.Write("");
                 Int32.TryParse(Console.ReadLine(), out money);
                 Console.WriteLine();
@@ -101,7 +101,7 @@ namespace PandaBank
                         Console.ReadKey();
                         Console.Clear();
                         break;
-                    case 5:
+                    case 8:
                         loginUser.ShowTransactions();
                         Console.ReadKey();
                         Console.Clear();
