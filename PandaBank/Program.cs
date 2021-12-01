@@ -33,6 +33,7 @@ namespace PandaBank
 
                     if (userAnswer == "Admin" || userPass == "3.14")
                     {
+                        Console.WriteLine("Välkommen Admin, vad vill du göra?");
                         SignInAdmin(a, ListOfCustomers);
                         break;
                     }
@@ -117,7 +118,7 @@ namespace PandaBank
 
         private static void SignInAdmin(Admin a, List<Customer> customers)
         {
-            Console.WriteLine("Välkommen Admin, vad vill du göra?");
+            
             Console.WriteLine("[1] Se en lista över alla användare");
             Console.WriteLine("[2] Skapa en nya användare");
             Console.WriteLine("[3] Överför Pengar Till Andra Användare");
@@ -128,12 +129,19 @@ namespace PandaBank
             {
                 case 1:
                     a.ShowCustomers();
+                    Console.ReadKey();
+                    Console.Clear();
+                    SignInAdmin(a,customers);
                     break;
                 case 2:
                     a.CreateCustomer();
+                    Console.Clear();
+                    SignInAdmin(a, customers);
                     break;
                 case 8:
                     LoginUs(a, customers);
+                    Console.Clear();
+                    SignInAdmin(a, customers);
                     break;
                 default:
                     break;
