@@ -126,7 +126,7 @@ namespace PandaBank
             while (toAccount == null)
             {
                 Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
-                fromAccount = Console.ReadLine();
+                toAcc = Console.ReadLine();
                 toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             }
 
