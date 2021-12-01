@@ -113,8 +113,8 @@ namespace PandaBank
             Customer toUser2 = ListUser.Find(u => u.userName == toUser);
             while (toUser2 == null)
             {
-                Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
-                fromAccount = Console.ReadLine();
+                Console.Write("Ogiltig användare! Skriv in en ny: ");
+                toUser = Console.ReadLine();
                 toUser2 = ListUser.Find(u => u.userName == toUser);
             }
 
