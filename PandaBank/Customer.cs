@@ -89,6 +89,9 @@ namespace PandaBank
             Console.WriteLine("Uppdaterad info:");
             account.PrintInfo();
             account2.PrintInfo();
+
+            SaveTranscation(moneyamount, account, false);
+            SaveTranscation(moneyamount, account2, true);
         }
         public void TransferMoneyToUser(List<Customer> ListUser)
         {
@@ -163,6 +166,9 @@ namespace PandaBank
             toAccount._Balance += amount;
 
             fromAcc.PrintInfo();
+
+            SaveTranscation(amount, fromAcc, false);
+            toUser2.SaveTranscation(amount, toAccount, true);
         }
         public void CreateAccount()
         {
