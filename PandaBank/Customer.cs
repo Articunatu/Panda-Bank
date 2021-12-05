@@ -170,14 +170,25 @@ namespace PandaBank
             SaveTranscation(amount, fromAcc, false);
             toUser2.SaveTranscation(amount, toAccount, true);
         }
+        public enum Currency
+        {
+            kr = 1,
+            dollar,
+            pund,
+            euro
+        }
         public void CreateAccount()
         {
             Console.Write("Namnge konto: ");
             string accountName = Console.ReadLine();
             float accountAm = 0;
-            Accounts createAccounts = new Accounts(accountName, accountAm);
+            Console.WriteLine("Svenska krona: kr | US dollar: dollar | Brittisk pund: pund | Euro: euro ");
+            Console.Write("Välj valuta: ");
+            string chooseCurrency = Console.ReadLine();
+            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
+            Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
             ListOfAccounts.Add(createAccounts);
-            Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance);
+            Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
         }
     }
 }

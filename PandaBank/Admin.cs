@@ -11,12 +11,12 @@ namespace PandaBank
         Customer U2 = new Customer("Daniel", "1111");
         Customer U3 = new Customer("Emma", "2222");
 
-        Accounts a1 = new Accounts("Spar", 44000);
-        Accounts a2 = new Accounts("Lön", 22998);
-        Accounts a3 = new Accounts("Fond", 33711);
-        Accounts a4 = new Accounts("Aktie", 11000);
-        Accounts a5 = new Accounts("Privat", 5500);
-        Accounts a6 = new Accounts("Investeringar", 99999);
+        Accounts a1 = new Accounts("Spar", 44000, "kr");
+        Accounts a2 = new Accounts("Lön", 22998, "kr");
+        Accounts a3 = new Accounts("Fond", 33711, "kr");
+        Accounts a4 = new Accounts("Aktie", 11000, "kr");
+        Accounts a5 = new Accounts("Privat", 5500, "kr");
+        Accounts a6 = new Accounts("Investeringar", 99999, "kr");
 
         public void AdminSetup()
         {
