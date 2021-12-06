@@ -71,10 +71,12 @@ namespace PandaBank
             {
                 decimal IntrestRate = 0.01M;
                 decimal YearlyAmount = IntrestRate * (decimal)moneyAmount;
-                Console.WriteLine("Om räntan är " + IntrestRate + " kommer du att få en årlig summa på:" + Math.Round(YearlyAmount, 2));
+                Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig summa på: " + Math.Round(YearlyAmount, 2));
             }
 
+            depositAccount._Balance += moneyAmount;
             depositAccount.PrintInfo();
+            SaveTranscation(moneyAmount, depositAccount, true);
         }
 
         public void WithdrawMoney()
@@ -107,7 +109,9 @@ namespace PandaBank
             }
             while (isException);
 
+            withdrawAccount._Balance -= moneyAmount;
             withdrawAccount.PrintInfo();
+            SaveTranscation(moneyAmount, withdrawAccount, false);
         }
         public void IntrestAmount()
         {

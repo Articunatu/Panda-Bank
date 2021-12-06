@@ -23,7 +23,7 @@ namespace PandaBank
 
         public void PrintInfo()
         {
-            Console.WriteLine(name + ": "+ balance + " " + currency);
+            Console.WriteLine(name + ":\t"+ balance + "\t" + currency);
         }
     }
 }
