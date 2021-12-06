@@ -187,12 +187,12 @@ namespace PandaBank
             string chooseCurrency = Console.ReadLine();
             string cC = chooseCurrency.ToUpper();
             Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), cC);
-            while (chooseCurrency == null)
-            {
-                Console.Write("Ogiltig valuta! Vänligen försök igen: ");
-                cC = Console.ReadLine();
-                chooseCurrency = 
-            }
+            //while (chooseCurrency == null)
+            //{
+            //    Console.Write("Ogiltig valuta! Vänligen försök igen: ");
+            //    cC = Console.ReadLine();
+            //    chooseCurrency = 
+            //}
             Accounts createAccounts = new Accounts(accountName, accountAm, cC);
             ListOfAccounts.Add(createAccounts);
             Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
