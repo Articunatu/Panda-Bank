@@ -182,11 +182,18 @@ namespace PandaBank
             Console.Write("Namnge konto: ");
             string accountName = Console.ReadLine();
             float accountAm = 0;
-            Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR ");
+            Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR");
             Console.Write("Välj valuta: ");
             string chooseCurrency = Console.ReadLine();
-            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
-            Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
+            string cC = chooseCurrency.ToUpper();
+            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), cC);
+            while (chooseCurrency == null)
+            {
+                Console.Write("Ogiltig valuta! Vänligen försök igen: ");
+                cC = Console.ReadLine();
+                chooseCurrency = 
+            }
+            Accounts createAccounts = new Accounts(accountName, accountAm, cC);
             ListOfAccounts.Add(createAccounts);
             Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
         }

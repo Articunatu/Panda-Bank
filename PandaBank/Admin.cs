@@ -20,14 +20,13 @@ namespace PandaBank
 
         public void AdminSetup()
         {
-            U1.AddAccounts(a1); U1.AddAccounts(a2); //First user's accounts
-            U2.AddAccounts(a3); U2.AddAccounts(a4);      //Second user's account
+            U1.AddAccounts(a1); U1.AddAccounts(a2);  //First user's accounts
+            U2.AddAccounts(a3); U2.AddAccounts(a4);  //Second user's account
             U3.AddAccounts(a5); U3.AddAccounts(a6);
             ListOfCustomers.Add(U1);
             ListOfCustomers.Add(U2);
             ListOfCustomers.Add(U3);
         }
-
 
         public void ShowCustomers()
         {
