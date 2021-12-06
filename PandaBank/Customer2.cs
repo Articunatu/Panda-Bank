@@ -129,14 +129,30 @@ namespace PandaBank
             Console.Write("Välj valuta: ");
             string chooseCurrency = Console.ReadLine();
             Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
+            float Moneylimit = 0;
+            foreach (var item in ListOfAccounts)
+            {
+                Moneylimit += item._Balance;
+            }
+            decimal MoneyLimit2 = Convert.ToDecimal(Moneylimit);
             Console.WriteLine("Hur mycket vill du låna?");
             decimal BorrowAmount = Convert.ToDecimal(Console.ReadLine());
+            MoneyLimit2 = MoneyLimit2*5;
+            while (BorrowAmount > MoneyLimit2)
+            {
+                Console.WriteLine("Du har för lite pengar för att låna så mycket");
+                Console.WriteLine("Hur mycket vill du låna?");
+                BorrowAmount = Convert.ToDecimal(Console.ReadLine());
+            }
+      
+
             decimal LoanintrestRate = 0.10M;
             decimal YearlyIntrest = BorrowAmount * LoanintrestRate;
             Console.WriteLine("Kostnaden på lånet blir {0} {1} per år, vid en ränta på {2}", YearlyIntrest, chooseCurrency, LoanintrestRate);
             Console.ReadKey();
 
 
+            
 
 
         }
