@@ -102,6 +102,11 @@ namespace PandaBank
                         Console.ReadKey();
                         Console.Clear();
                         break;
+                    case 5:
+                        SavingsAccount A = new SavingsAccount();
+                        A.IntrestAmount();
+                        break;
+                            
                     case 8:
                         loginUser.ShowTransactions();
                         Console.ReadKey();
@@ -122,8 +127,9 @@ namespace PandaBank
             Console.WriteLine("[1] Se en lista över alla användare");
             Console.WriteLine("[2] Skapa en nya användare");
             Console.WriteLine("[3] Överför Pengar Till Andra Användare");
-
-            int choice = int.Parse(Console.ReadLine());
+            Console.WriteLine("[4] Logga ut.");
+            int choice;
+            Int32.TryParse(Console.ReadLine(), out choice);
 
             switch (choice)
             {
@@ -138,12 +144,17 @@ namespace PandaBank
                     Console.Clear();
                     SignInAdmin(a, customers);
                     break;
-                case 8:
+                case 3:
                     LoginUs(a, customers);
                     Console.Clear();
                     SignInAdmin(a, customers);
                     break;
+                case 4:
+                    LoginUs(a, customers);
+                    break;
                 default:
+                    Console.WriteLine("Var snäll och välj ett giltigt alternativ!");
+                    SignInAdmin(a, customers);
                     break;
             }
         }
