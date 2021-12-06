@@ -172,17 +172,17 @@ namespace PandaBank
         }
         public enum Currency
         {
-            kr = 1,
-            dollar,
-            pund,
-            euro
+            SEK = 1,
+            USD,
+            GBP,
+            EUR
         }
         public void CreateAccount()
         {
             Console.Write("Namnge konto: ");
             string accountName = Console.ReadLine();
             float accountAm = 0;
-            Console.WriteLine("Svenska krona: kr | US dollar: dollar | Brittisk pund: pund | Euro: euro ");
+            Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR ");
             Console.Write("Välj valuta: ");
             string chooseCurrency = Console.ReadLine();
             Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
