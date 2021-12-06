@@ -71,10 +71,12 @@ namespace PandaBank
             {
                 decimal IntrestRate = 0.01M;
                 decimal YearlyAmount = IntrestRate * (decimal)moneyAmount;
-                Console.WriteLine("Om räntan är " + IntrestRate + " kommer du att få en årlig summa på:" + Math.Round(YearlyAmount, 2));
+                Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig summa på: " + Math.Round(YearlyAmount, 2));
             }
 
+            depositAccount._Balance += moneyAmount;
             depositAccount.PrintInfo();
+            SaveTranscation(moneyAmount, depositAccount, true);
         }
 
         public void WithdrawMoney()
@@ -107,7 +109,52 @@ namespace PandaBank
             }
             while (isException);
 
+            withdrawAccount._Balance -= moneyAmount;
             withdrawAccount.PrintInfo();
+            SaveTranscation(moneyAmount, withdrawAccount, false);
+        }
+        public void IntrestAmount()
+        {
+            decimal IntrestRate = 0.01M;
+            Console.Write("Skriv hur mycket vill du sätta in:");
+            decimal InsertedAmount = Convert.ToDecimal(Console.ReadLine());
+            decimal YearlyAmount = IntrestRate * InsertedAmount;
+            Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
+        }
+
+        public void Loan()
+        {
+            
+            Console.WriteLine("I vilken valuta Svenska kronor: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR ");
+            Console.Write("Välj valuta: ");
+            string chooseCurrency = Console.ReadLine();
+            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
+            float Moneylimit = 0;
+            foreach (var item in ListOfAccounts)
+            {
+                Moneylimit += item._Balance;
+            }
+            decimal MoneyLimit2 = Convert.ToDecimal(Moneylimit);
+            Console.WriteLine("Hur mycket vill du låna?");
+            decimal BorrowAmount = Convert.ToDecimal(Console.ReadLine());
+            MoneyLimit2 = MoneyLimit2*5;
+            while (BorrowAmount > MoneyLimit2)
+            {
+                Console.WriteLine("Du har för lite pengar för att låna så mycket");
+                Console.WriteLine("Hur mycket vill du låna?");
+                BorrowAmount = Convert.ToDecimal(Console.ReadLine());
+            }
+      
+
+            decimal LoanintrestRate = 0.10M;
+            decimal YearlyIntrest = BorrowAmount * LoanintrestRate;
+            Console.WriteLine("Kostnaden på lånet blir {0} {1} per år, vid en ränta på {2}", YearlyIntrest, chooseCurrency, LoanintrestRate);
+            Console.ReadKey();
+
+
+            
+
+
         }
     }
 }
