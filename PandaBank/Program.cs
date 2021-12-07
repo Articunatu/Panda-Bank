@@ -111,6 +111,10 @@ namespace PandaBank
                         Console.ReadKey();
                         Console.Clear();
                         break;
+                    case 7:
+                        loginUser.Loan();
+                        Console.Clear();
+                        break;
                     case 8:
                         loginUser.ShowTransactions();
                         Console.ReadKey();
