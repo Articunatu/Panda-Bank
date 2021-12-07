@@ -7,10 +7,14 @@ namespace PandaBank
     {
         List<string> Transactions = new List<string>();
 
-        public void SaveTranscation(float transaction, Accounts transferAccount, bool plusOrMinus)
+        public void SaveTranscation(float transaction, Accounts transferAccount, bool plusOrMinus, string changedTransfer)
         {
             char mathSign = plusOrMinus ? '+' : '-';
-            string savedTransfer = $"Ändrat bankkonto: {transferAccount._Name} Ändrad summa: {mathSign}{transaction}";
+            if(transferAccount._Name.ToCharArray().GetLength(0) < 7)
+            {
+                transferAccount._Name += "\t";
+            }
+            string savedTransfer = $"{transferAccount._Name}\t {changedTransfer}\t {mathSign}{transaction} {transferAccount._Currency}";
             Transactions.Add(savedTransfer);
         }
 
@@ -22,24 +26,25 @@ namespace PandaBank
             }
         }
 
-        public void CreateSavingsAccount()
-        {
-            Console.Write("Namnge sparkonto: ");
-            string accountName = Console.ReadLine();
-            float accountAm = 0;
-            Console.WriteLine("Svenska krona: kr | US dollar: dollar | Brittisk pund: pund | Euro: euro ");
-            Console.Write("Välj valuta: ");
-            string chooseCurrency = Console.ReadLine();
-            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);  
-            Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
-            createAccounts.IsSavings = true;
-            ListOfAccounts.Add(createAccounts);
-            Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
-        }
+        //Call on CreateAccount instead
+        //public void CreateSavingsAccount()
+        //{
+        //    Console.Write("Namnge sparkonto: ");
+        //    string accountName = Console.ReadLine();
+        //    float accountAm = 0;
+        //    Console.WriteLine("Svenska krona: kr | US dollar: dollar | Brittisk pund: pund | Euro: euro ");
+        //    Console.Write("Välj valuta: ");
+        //    string chooseCurrency = Console.ReadLine();
+        //    Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);  
+        //    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
+        //    createAccounts.IsSavings = true;
+        //    ListOfAccounts.Add(createAccounts);
+        //    Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
+        //}
 
         public void DepositMoney()
         {
-            Console.Write("Välj ett konto att överföra pengar till: ");
+            Console.Write("Välj ett konto att sätta in pengar på: ");
             string depositText = Console.ReadLine();
             Accounts depositAccount = ListOfAccounts.Find(s => s._Name == depositText);
             while (depositAccount == null)
@@ -49,7 +54,7 @@ namespace PandaBank
                 depositAccount = ListOfAccounts.Find(s => s._Name == depositText);
             }
 
-            Console.WriteLine("Hur mycket pengar vill du föra över?");
+            Console.Write("Hur mycket pengar vill du sätta in?");
             float moneyAmount = 0;
             bool isException = false;
             do
@@ -76,12 +81,12 @@ namespace PandaBank
 
             depositAccount._Balance += moneyAmount;
             depositAccount.PrintInfo();
-            SaveTranscation(moneyAmount, depositAccount, true);
+            SaveTranscation(moneyAmount, depositAccount, true, "Insättning på konto");
         }
 
         public void WithdrawMoney()
         {
-            Console.Write("Välj ett konto att Ta ut pengar ifrån: ");
+            Console.Write("Välj ett konto att ta ut pengar ifrån: ");
             string withdrawText = Console.ReadLine();
             Accounts withdrawAccount = ListOfAccounts.Find(s => s._Name == withdrawText);
             while (withdrawAccount == null)
@@ -91,7 +96,7 @@ namespace PandaBank
                 withdrawAccount = ListOfAccounts.Find(s => s._Name == withdrawText);
             }
 
-            Console.WriteLine("Hur mycket pengar vill du ta ut?");
+            Console.Write("Hur mycket pengar vill du ta ut?");
             float moneyAmount = 0;
             bool isException = false;
             do
@@ -111,7 +116,7 @@ namespace PandaBank
 
             withdrawAccount._Balance -= moneyAmount;
             withdrawAccount.PrintInfo();
-            SaveTranscation(moneyAmount, withdrawAccount, false);
+            SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag från konto");
         }
         public void IntrestAmount()
         {

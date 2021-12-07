@@ -90,8 +90,8 @@ namespace PandaBank
             account.PrintInfo();
             account2.PrintInfo();
 
-            SaveTranscation(moneyamount, account, false);
-            SaveTranscation(moneyamount, account2, true);
+            SaveTranscation(moneyamount, account, false, "Överföring till annat konto");
+            SaveTranscation(moneyamount, account2, true, "Överföring från annat konto");
         }
         public void TransferMoneyToUser(List<Customer> ListUser)
         {
@@ -167,8 +167,8 @@ namespace PandaBank
 
             fromAcc.PrintInfo();
 
-            SaveTranscation(amount, fromAcc, false);
-            toUser2.SaveTranscation(amount, toAccount, true);
+            SaveTranscation(amount, fromAcc, false, "Överföring till annan användare");
+            toUser2.SaveTranscation(amount, toAccount, true, "Överföring från annan användare");
         }
         public enum Currency
         {
@@ -187,13 +187,40 @@ namespace PandaBank
             string chooseCurrency = Console.ReadLine();
             string cC = chooseCurrency.ToUpper();
             Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), cC);
-            //while (chooseCurrency == null)
+            bool isException = true;
+            //while (isException)
             //{
-            //    Console.Write("Ogiltig valuta! Vänligen försök igen: ");
-            //    cC = Console.ReadLine();
-            //    chooseCurrency = 
+            //    try
+            //    {
+
+            //        if (chooseCurrency == null)
+            //        {
+            //            Console.Write("Ogiltig valuta! Vänligen försök igen: ");
+            //            isException = true;
+            //        }
+            //        else
+            //        {
+            //            isException = false;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        Console.Write("Ogiltig valuta! Vänligen försök igen: ");
+            //        isException = true;
+            //    }
             //}
+            
             Accounts createAccounts = new Accounts(accountName, accountAm, cC);
+            Console.Write("Ska det vara ett sparkonto, skriv då JA: ");
+            string binaryAnswer = Console.ReadLine().ToUpper();
+            if (binaryAnswer == "JA")
+            {
+                createAccounts.IsSavings = true;
+            }
+            else
+            {
+                createAccounts.IsSavings = false;
+            }
             ListOfAccounts.Add(createAccounts);
             Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
         }
