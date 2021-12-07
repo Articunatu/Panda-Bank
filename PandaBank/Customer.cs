@@ -184,38 +184,30 @@ namespace PandaBank
             float accountAm = 0;
             Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR");
             Console.Write("Välj valuta: ");
-            string chooseCurrency = Console.ReadLine();
+            string chooseCurrency = "";
             string cC = chooseCurrency.ToUpper();
-            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), cC);
             bool isException = true;
-            //while (isException)
-            //{
-            //    try
-            //    {
-
-            //        if (chooseCurrency == null)
-            //        {
-            //            Console.Write("Ogiltig valuta! Vänligen försök igen: ");
-            //            isException = true;
-            //        }
-            //        else
-            //        {
-            //            isException = false;
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        Console.Write("Ogiltig valuta! Vänligen försök igen: ");
-            //        isException = true;
-            //    }
-            //}
-            
+            while (isException)
+            {
+                try
+                {
+                    chooseCurrency = Console.ReadLine().ToUpper();
+                    Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
+                    isException = false;
+                }
+                catch (Exception)
+                {
+                    Console.Write("Ogiltigt format! Vänligen välj giltig valuta: ");
+                    isException = true;
+                }
+            }
             Accounts createAccounts = new Accounts(accountName, accountAm, cC);
             Console.Write("Ska det vara ett sparkonto, skriv då JA: ");
             string binaryAnswer = Console.ReadLine().ToUpper();
             if (binaryAnswer == "JA")
             {
                 createAccounts.IsSavings = true;
+                Console.Write("Vill du sätta in pengar nu?");
             }
             else
             {
@@ -223,6 +215,8 @@ namespace PandaBank
             }
             ListOfAccounts.Add(createAccounts);
             Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
+
+            
         }
     }
 }
