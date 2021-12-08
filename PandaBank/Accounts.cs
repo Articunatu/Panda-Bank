@@ -4,6 +4,7 @@ namespace PandaBank
 {
     public class Accounts
     {
+        #region Fields
         private string name;
         private float balance;
         private string currency;
@@ -14,6 +15,8 @@ namespace PandaBank
         public string _Currency { get => currency; set => currency = value; }
         public bool IsSavings { get => isSavings; set => isSavings = value; }
 
+        #endregion
+
         public Accounts(string _name, float _balance, string _currency)
         {
             name = _name;
@@ -23,11 +26,12 @@ namespace PandaBank
 
         public void PrintInfo()
         {
+            string extender = "";
             if (name.ToCharArray().GetLength(0) < 7)
             {
-                name += "\t";
+                extender += "\t";
             }
-            Console.WriteLine(name + "\t"+ balance + "\t" + currency);
+            Console.WriteLine(name + extender + "\t"+ balance + "\t" + currency);
         }
     }
 }
