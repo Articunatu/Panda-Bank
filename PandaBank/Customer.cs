@@ -25,6 +25,13 @@ namespace PandaBank
                 item.PrintInfo();
             }
         }
+        public void ShoweAccountsNames()
+        {
+            foreach (var item in ListOfAccounts)
+            {
+                item.PrintAccountName();
+            }
+        }
 
         public void TransferAccounts()
         {
@@ -119,7 +126,7 @@ namespace PandaBank
             }
 
             Console.WriteLine("Välj konto att skicka till\n");
-            toUser2.ShoweAccounts();
+            toUser2.ShoweAccountsNames();
             Console.Write("Konto: ");
             string toAcc = Console.ReadLine();
             Accounts toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);

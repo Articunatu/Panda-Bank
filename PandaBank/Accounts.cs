@@ -33,5 +33,10 @@ namespace PandaBank
             }
             Console.WriteLine(name + extender + "\t"+ balance + "\t" + currency);
         }
+        
+        public void PrintAccountName()
+        {
+            Console.WriteLine("Bankkonto: "+name);
+        }
     }
 }
