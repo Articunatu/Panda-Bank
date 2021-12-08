@@ -147,7 +147,7 @@ namespace PandaBank
                     isException = true;
                 }
             }
-            while(isException);
+            while (isException);
 
             while (amount > fromAcc._Balance)
             {
@@ -184,8 +184,7 @@ namespace PandaBank
             float accountAm = 0;
             Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR");
             Console.Write("Välj valuta: ");
-            string chooseCurrency = "";
-            string cC = chooseCurrency.ToUpper();
+            string chooseCurrency = "";   
             bool isException = true;
             while (isException)
             {
@@ -194,6 +193,26 @@ namespace PandaBank
                     chooseCurrency = Console.ReadLine().ToUpper();
                     Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
                     isException = false;
+                    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
+                    Console.Write("Ska det vara ett sparkonto, skriv då JA: ");
+                    string binaryAnswer = Console.ReadLine().ToUpper();
+                    if (binaryAnswer == "JA")
+                    {
+                        createAccounts.IsSavings = true;
+                        Console.WriteLine();
+                        Console.Write("Vill du göra en insättning nu, skriv då JA: ");
+                        string depositAnswer = Console.ReadLine().ToUpper();
+                        if (depositAnswer == "JA")
+                        {
+                            IntrestAmount();
+                        }
+                    }
+                    else
+                    {
+                        createAccounts.IsSavings = false;
+                    }
+                    ListOfAccounts.Add(createAccounts);
+                    Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
                 }
                 catch (Exception)
                 {
@@ -201,22 +220,8 @@ namespace PandaBank
                     isException = true;
                 }
             }
-            Accounts createAccounts = new Accounts(accountName, accountAm, cC);
-            Console.Write("Ska det vara ett sparkonto, skriv då JA: ");
-            string binaryAnswer = Console.ReadLine().ToUpper();
-            if (binaryAnswer == "JA")
-            {
-                createAccounts.IsSavings = true;
-                Console.Write("Vill du sätta in pengar nu?");
-            }
-            else
-            {
-                createAccounts.IsSavings = false;
-            }
-            ListOfAccounts.Add(createAccounts);
-            Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
 
-            
+
         }
     }
 }
