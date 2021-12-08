@@ -10,10 +10,6 @@ namespace PandaBank
         public void SaveTranscation(float transaction, Accounts transferAccount, bool plusOrMinus, string changedTransfer)
         {
             char mathSign = plusOrMinus ? '+' : '-';
-            if(transferAccount._Name.ToCharArray().GetLength(0) < 7)
-            {
-                transferAccount._Name += "\t";
-            }
             string savedTransfer = $"{transferAccount._Name}\t {changedTransfer}\t {mathSign}{transaction} {transferAccount._Currency}";
             Transactions.Add(savedTransfer);
         }
@@ -24,6 +20,11 @@ namespace PandaBank
             {
                 Console.WriteLine(transaction);
             }
+            if (Transactions.Count == 0)
+            {
+                Console.WriteLine("Inga transaktioner ännu genomförts");
+            }
+
         }
 
         //Call on CreateAccount instead
@@ -44,6 +45,7 @@ namespace PandaBank
 
         public void DepositMoney()
         {
+            ShoweAccounts();
             Console.Write("Välj ett konto att sätta in pengar på: ");
             string depositText = Console.ReadLine();
             Accounts depositAccount = ListOfAccounts.Find(s => s._Name == depositText);
@@ -54,7 +56,7 @@ namespace PandaBank
                 depositAccount = ListOfAccounts.Find(s => s._Name == depositText);
             }
 
-            Console.Write("Hur mycket pengar vill du sätta in?");
+            Console.Write("Skriv hur mycket pengar du vill sätta in: ");
             float moneyAmount = 0;
             bool isException = false;
             do
@@ -81,11 +83,12 @@ namespace PandaBank
 
             depositAccount._Balance += moneyAmount;
             depositAccount.PrintInfo();
-            SaveTranscation(moneyAmount, depositAccount, true, "Insättning på konto");
+            SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat");
         }
 
         public void WithdrawMoney()
         {
+            ShoweAccounts();
             Console.Write("Välj ett konto att ta ut pengar ifrån: ");
             string withdrawText = Console.ReadLine();
             Accounts withdrawAccount = ListOfAccounts.Find(s => s._Name == withdrawText);
@@ -96,7 +99,7 @@ namespace PandaBank
                 withdrawAccount = ListOfAccounts.Find(s => s._Name == withdrawText);
             }
 
-            Console.Write("Hur mycket pengar vill du ta ut?");
+            Console.Write("Skriv hur mycket pengar vill du ta ut: ");
             float moneyAmount = 0;
             bool isException = false;
             do
@@ -116,12 +119,13 @@ namespace PandaBank
 
             withdrawAccount._Balance -= moneyAmount;
             withdrawAccount.PrintInfo();
-            SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag från konto");
+            SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag genom bankomat");
         }
+
         public void IntrestAmount()
         {
             decimal IntrestRate = 0.01M;
-            Console.Write("Skriv hur mycket vill du sätta in:");
+            Console.Write("Skriv hur mycket vill du sätta in: ");
             decimal InsertedAmount = Convert.ToDecimal(Console.ReadLine());
             decimal YearlyAmount = IntrestRate * InsertedAmount;
             Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
@@ -143,7 +147,7 @@ namespace PandaBank
                 }
                 catch (Exception)
                 {
-                    Console.Write("Ogiltigt format! Vänligen välj nytt belopp: ");
+                    Console.Write("Ogiltig valuta, vänligen skriv in en ny: ");
                     isException = true;
                 }
             }
@@ -153,7 +157,8 @@ namespace PandaBank
                 Moneylimit += item._Balance;
             }
             decimal MoneyLimit2 = Convert.ToDecimal(Moneylimit);
-            Console.WriteLine("Hur mycket vill du låna?");
+            Console.WriteLine("Totalt kan man låna fem gånger så mycket pengar som man själv äger (summan av alla ens kontons saldon).");
+            Console.Write("Skriv in hur mycket du vill låna: ");
             decimal BorrowAmount = 0;
             isException = true;
             while (isException)
@@ -174,7 +179,7 @@ namespace PandaBank
             while (BorrowAmount > MoneyLimit2)
             {
                 Console.WriteLine("Du har för lite pengar för att låna så mycket");
-                Console.WriteLine("Hur mycket vill du låna?");
+                Console.Write("Skriv in et nytyt belopp på hur mycket du vill låna: ");
                 BorrowAmount = Convert.ToDecimal(Console.ReadLine());
             }
 
