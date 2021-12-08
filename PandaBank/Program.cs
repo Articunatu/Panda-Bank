@@ -71,7 +71,7 @@ namespace PandaBank
                 Console.WriteLine("[4] Skapa Konto");
                 Console.WriteLine("[5] Sätt In Pengar");
                 Console.WriteLine("[6] Ta Ut Pengar");
-                Console.WriteLine("[7] //Låna Pengar//");
+                Console.WriteLine("[7] Låna Pengar");
                 Console.WriteLine("[8] Visa transaktioner");
                 Console.WriteLine("[9] Logga Ut");
                 Console.Write("");
@@ -121,8 +121,8 @@ namespace PandaBank
                         Console.Clear();
                         break;
                     case 9:
-                        LoginUs(a, customers);
                         Console.Clear();
+                        LoginUs(a, customers);
                         break;
                     default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
                 }
@@ -158,6 +158,7 @@ namespace PandaBank
                     SignInAdmin(a, customers);
                     break;
                 case 4:
+                    Console.Clear();
                     LoginUs(a, customers);
                     break;
                 default:
