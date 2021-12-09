@@ -25,13 +25,18 @@ namespace PandaBank
             {
                 for (int i = 0; i <= 2; i++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Användarnamn: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     string userAnswer = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Lösenord: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     string userPass = Console.ReadLine();
 
                     if (userAnswer == "Admin" || userPass == "3.14")
                     {
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Välkommen Admin, vad vill du göra?");
                         SignInAdmin(a, ListOfCustomers);
                         break;
@@ -41,9 +46,11 @@ namespace PandaBank
                     LoginUser result1 = ListOfCustomers.Find(result => result.password == userPass);
                     if (result == null || result1 == null)
                     {
-                        Console.WriteLine("Fel användarnamn eller lösenord");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Fel användarnamn eller lösenord, skriv in ett nytt:");
                         if (i == 2)
                         {
+                            Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine("Du har nått maxgräns försök!");
                             Environment.Exit(0);
                         }
@@ -63,6 +70,7 @@ namespace PandaBank
             while (Online)
             {
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("PandaBanken");
                 int money;
                 Console.WriteLine("[1] Visa Konton");
@@ -131,7 +139,7 @@ namespace PandaBank
 
         private static void SignInAdmin(Admin a, List<Customer> customers)
         {
-            
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("[1] Se en lista över alla användare");
             Console.WriteLine("[2] Skapa en nya användare");
             Console.WriteLine("[3] Överför Pengar Till Andra Användare");
