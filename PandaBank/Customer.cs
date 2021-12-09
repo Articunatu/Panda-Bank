@@ -210,8 +210,9 @@ namespace PandaBank
                         Console.Write("Vill du göra en insättning nu, skriv då JA: ");
                         string depositAnswer = Console.ReadLine().ToUpper();
                         if (depositAnswer == "JA")
-                        {
-                            IntrestAmount();
+                        {                        
+                            float InsertedAmount = IntrestAmount();
+                            createAccounts._Balance = createAccounts._Balance + InsertedAmount;
                         }
                     }
                     else
@@ -219,6 +220,7 @@ namespace PandaBank
                         createAccounts.IsSavings = false;
                     }
                     ListOfAccounts.Add(createAccounts);
+
                     Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
                 }
                 catch (Exception)
@@ -230,5 +232,6 @@ namespace PandaBank
 
 
         }
+
     }
 }

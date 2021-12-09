@@ -122,13 +122,15 @@ namespace PandaBank
             SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag genom bankomat");
         }
 
-        public void IntrestAmount()
+        public float IntrestAmount()
         {
             decimal IntrestRate = 0.01M;
             Console.Write("Skriv hur mycket vill du sätta in: ");
             decimal InsertedAmount = Convert.ToDecimal(Console.ReadLine());
             decimal YearlyAmount = IntrestRate * InsertedAmount;
             Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
+            return (float)InsertedAmount; 
+
         }
 
         public void Loan()

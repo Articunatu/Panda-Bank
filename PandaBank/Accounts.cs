@@ -27,7 +27,7 @@ namespace PandaBank
         public void PrintInfo()
         {
             string extender = "";
-            if (name.ToCharArray().GetLength(0) < 7)
+            if (name.ToCharArray().GetLength(0) <= 7)
             {
                 extender += "\t";
             }
