@@ -24,7 +24,6 @@ namespace PandaBank
             {
                 Console.WriteLine("Inga transaktioner ännu genomförts");
             }
-
         }
 
         //Call on CreateAccount instead
