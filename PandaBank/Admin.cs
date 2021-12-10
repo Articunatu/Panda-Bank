@@ -46,7 +46,62 @@ namespace PandaBank
             Customer createdCustomer = new Customer(nameCreated, passwordCreated);
             ListOfCustomers.Add(createdCustomer);
             
-            Console.WriteLine("Du har lagt till följande användare: "+createdCustomer.userName +"\nMed lösenordet: " + createdCustomer.password);
+            Console.WriteLine("Du har lagt till följande användare: " + createdCustomer.userName + "\nMed lösenordet: " + createdCustomer.password);
+        }
+        public void UpdateCurrency()
+        {
+            bool myBool = true;
+            while (myBool)
+            {
+                LoginUser L = new LoginUser();
+                Console.WriteLine("Nuvarande värde på valutan:");
+                foreach (decimal item in L.currencyChange)
+                {
+                    Console.WriteLine(item);
+                }
+                Console.WriteLine("Välj valuta som du vill ändra värdet på! \nSvenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR");
+                Console.Write("Valuta: ");
+                string changeValue = Console.ReadLine().ToUpper();
+                switch (changeValue)
+                {
+                    case "SEK":
+                        Console.Write("Vad är det nya värdet? ");
+                        string chooseNewValue = Console.ReadLine();
+                        decimal deciValue = Convert.ToDecimal(chooseNewValue);
+                        L.currencyChange[0] = deciValue;
+                        break;
+                    case "USD":
+                        Console.Write("Vad är det nya värdet? ");
+                        string chooseNewValue1 = Console.ReadLine();
+                        decimal deciValue1 = Convert.ToDecimal(chooseNewValue1);
+                        L.currencyChange[1] = deciValue1;
+                        break;
+                    case "GBP":
+                        Console.Write("Vad är det nya värdet? ");
+                        string chooseNewValue2 = Console.ReadLine();
+                        decimal deciValue2 = Convert.ToDecimal(chooseNewValue2);
+                        L.currencyChange[2] = deciValue2;
+                        break;
+                    case "EUR":
+                        Console.Write("Vad är det nya värdet? ");
+                        string chooseNewValue3 = Console.ReadLine();
+                        decimal deciValue3 = Convert.ToDecimal(chooseNewValue3);
+                        L.currencyChange[3] = deciValue3;
+                        break;
+                    case "Klar":
+                        Console.WriteLine("Ny värde på valutan:");
+                        foreach (decimal item in L.currencyChange)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Vänligen välj giltig valuta!");
+                        break;
+                }
+            }
+
         }
     }
     //    public object A()
