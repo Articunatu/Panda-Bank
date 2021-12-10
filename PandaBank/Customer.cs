@@ -229,9 +229,10 @@ namespace PandaBank
                     isException = true;
                 }
             }
-
+        }
+        public void ExchangeRate() //decimal ist för void
+        {
 
         }
-
     }
 }

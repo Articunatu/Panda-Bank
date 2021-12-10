@@ -226,6 +226,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                     Console.Clear();
                     LoginUs(a, customers);
                     break;
+                case 5:
+                    a.UpdateCurrency();
+                    break;
                 default:
                     Console.WriteLine("Var snäll och välj ett giltigt alternativ!");
                     SignInAdmin(a, customers);

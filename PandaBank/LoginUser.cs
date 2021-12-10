@@ -15,7 +15,6 @@ namespace PandaBank
 
         public List<Customer> ListOfCustomers = new List<Customer>();
 
-        
         public decimal[] currencyChange = new decimal[] { 1.00M, 0.11025802M, 0.083344351M, 0.097629977M };
 
         //private decimal[] currencyChange = new decimal[] { 1.00M, 0.11025802M, 0.083344351M, 0.097629977M };
