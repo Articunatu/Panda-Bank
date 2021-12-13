@@ -188,6 +188,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                         break;
                     case 9:
                         Console.Clear();
+                        loginUser.ChangePassword();
+                        break;
+                    case 10:
+                        Console.Clear();
                         LoginUs(a, customers);
                         break;
                     default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
