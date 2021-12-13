@@ -45,16 +45,16 @@ namespace PandaBank
             Console.Write("Ange ett Lösenordet till den nya användaren: ");
             string passwordCreated = Console.ReadLine();
 
-            bool Test = passwordCreated.Any(char.IsLetter);
-            Test = passwordCreated.Any(char.IsDigit);
-            while (!Test)
+            while (!passwordCreated.Any(char.IsLetter) || !passwordCreated.Any(char.IsDigit))
             {
                 Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver");
+                Console.Write("Var god ange ett nytt lösenord: ");
                 passwordCreated = Console.ReadLine();
             }
             while (passwordCreated.Length < 8)
             {
                 Console.WriteLine("Lösenordet var för kort, det måste innehålla minst 8 tecken.");
+                Console.Write("Var god ange ett nytt lösenord: ");
                 passwordCreated = Console.ReadLine();
             }
             Customer createdCustomer = new Customer(nameCreated, passwordCreated);
