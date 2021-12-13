@@ -51,6 +51,7 @@ namespace PandaBank
                     if (userAnswer == "Admin" && userPass == "1234")
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine();
                         Console.WriteLine("Välkommen Admin, vad vill du göra?");
                         SignInAdmin(a, ListOfCustomers);
                         break;
@@ -138,7 +139,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 Console.WriteLine("[6] Ta Ut Pengar");
                 Console.WriteLine("[7] Låna Pengar");
                 Console.WriteLine("[8] Visa transaktioner");
-                Console.WriteLine("[9] Logga Ut");
+                Console.WriteLine("[9] Byta lösenord");
+                Console.WriteLine("[10] Logga Ut");
                 Console.Write("");
                 Int32.TryParse(Console.ReadLine(), out money);
                 Console.WriteLine();
@@ -186,6 +188,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                         Console.Clear();
                         break;
                     case 9:
+                        Console.Clear();
+                        loginUser.ChangePassword();
+                        break;
+                    case 10:
                         Console.Clear();
                         LoginUs(a, customers);
                         break;
