@@ -139,7 +139,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 Console.WriteLine("[6] Ta Ut Pengar");
                 Console.WriteLine("[7] Låna Pengar");
                 Console.WriteLine("[8] Visa transaktioner");
-                Console.WriteLine("[9] Logga Ut");
+                Console.WriteLine("[9] Change password");
+                Console.WriteLine("[10] Logga ut");
                 Console.Write("");
                 Int32.TryParse(Console.ReadLine(), out money);
                 Console.WriteLine();
