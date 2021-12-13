@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace PandaBank
 {
-    class BankController
+    struct BankController
     {
         internal void Start() 
         {
             Admin a = new Admin();
             a.AdminSetup();
+            a.userName = "Admin"; a.password = "1234";
             List<Customer> ListOfCustomers = a.ListOfCustomers;
             LoginUs(a, ListOfCustomers);
         }
@@ -48,11 +50,8 @@ namespace PandaBank
                         }
                     } while (keyPassword != ConsoleKey.Enter);
 
-                    if (userAnswer == "Admin" && userPass == "1234")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine();
-                        Console.WriteLine("Välkommen Admin, vad vill du göra?");
+                    if (userAnswer == a.userName && userPass == a.password)
+                    {                     
                         SignInAdmin(a, ListOfCustomers);
                         break;
                     }
@@ -97,6 +96,7 @@ namespace PandaBank
             bool Online = true;
             while (Online)
             {
+                Console.Clear();
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(@"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -139,8 +139,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 Console.WriteLine("[6] Ta Ut Pengar");
                 Console.WriteLine("[7] Låna Pengar");
                 Console.WriteLine("[8] Visa transaktioner");
-                Console.WriteLine("[9] Byta lösenord");
-                Console.WriteLine("[10] Logga Ut");
+                Console.WriteLine("[9] Logga Ut");
                 Console.Write("");
                 Int32.TryParse(Console.ReadLine(), out money);
                 Console.WriteLine();
@@ -189,10 +188,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                         break;
                     case 9:
                         Console.Clear();
-                        loginUser.ChangePassword();
-                        break;
-                    case 10:
-                        Console.Clear();
                         LoginUs(a, customers);
                         break;
                     default: Console.WriteLine("Var snäll och välj ett giltigt alternativ!"); break;
@@ -202,10 +197,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
 
         private static void SignInAdmin(Admin a, List<Customer> customers)
         {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Välkommen Admin, vad vill du göra?");
             Console.WriteLine("[1] Se en lista över alla användare");
             Console.WriteLine("[2] Skapa en nya användare");
-            Console.WriteLine("[3] Överför Pengar Till Andra Användare");
+            Console.WriteLine("[3] Uppdatera penningvärdet för valuta");
             Console.WriteLine("[4] Logga ut.");
             int choice;
             Int32.TryParse(Console.ReadLine(), out choice);
@@ -224,7 +221,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                     SignInAdmin(a, customers);
                     break;
                 case 3:
-                    LoginUs(a, customers);
+                    a.UpdateCurrency();
                     Console.Clear();
                     SignInAdmin(a, customers);
                     break;
