@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PandaBank
 {
@@ -188,6 +189,27 @@ namespace PandaBank
             decimal YearlyIntrest = BorrowAmount * LoanintrestRate;
             Console.WriteLine("Kostnaden på lånet blir {0} {1} per år, vid en ränta på {2}%.", YearlyIntrest, chooseCurrency, LoanintrestRate*100);
             Console.ReadKey();
+        }
+        public void ChangePassword()
+        {
+            Console.Write("Ange ett nytt Lösenord: ");
+
+            string passwordCreated = Console.ReadLine();
+
+            while(!passwordCreated.Any(char.IsLetter) || !passwordCreated.Any(char.IsNumber))
+            {
+                Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver");
+                Console.Write("Var god ange ett nytt lösenord: ");
+                passwordCreated = Console.ReadLine();
+            }
+           
+            while (passwordCreated.Length < 8)
+            {
+                Console.WriteLine("Lösenordet var för kort, det måste innehålla minst 8 tecken.");
+                Console.Write("Var god ange ett nytt lösenord: ");
+                passwordCreated = Console.ReadLine();
+            }
+            password = passwordCreated;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PandaBank
@@ -43,6 +44,19 @@ namespace PandaBank
             string nameCreated = Console.ReadLine();
             Console.Write("Ange ett Lösenordet till den nya användaren: ");
             string passwordCreated = Console.ReadLine();
+
+            bool Test = passwordCreated.Any(char.IsLetter);
+            Test = passwordCreated.Any(char.IsDigit);
+            while (!Test)
+            {
+                Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver");
+                passwordCreated = Console.ReadLine();
+            }
+            while (passwordCreated.Length < 8)
+            {
+                Console.WriteLine("Lösenordet var för kort, det måste innehålla minst 8 tecken.");
+                passwordCreated = Console.ReadLine();
+            }
             Customer createdCustomer = new Customer(nameCreated, passwordCreated);
             ListOfCustomers.Add(createdCustomer);
 
