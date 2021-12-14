@@ -42,6 +42,7 @@ namespace PandaBank
         {
             Console.Write("Ange Användarnamnet på den nya användaren: ");
             string nameCreated = Console.ReadLine();
+            Console.WriteLine("Lösenordet måste innehålla både siffror och bokstäver samt innehålla minst 8 tecken ");
             Console.Write("Ange ett Lösenordet till den nya användaren: ");
             string passwordCreated = Console.ReadLine();
 
