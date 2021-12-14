@@ -31,12 +31,70 @@ namespace PandaBank
             {
                 extender += "\t";
             }
-            Console.WriteLine(name + extender + "\t"+ balance + "\t" + currency);
+            Console.WriteLine(name + extender + "\t" + Math.Round(balance, 2) + "\t" + currency);
         }
-        
+
         public void PrintAccountName()
         {
-            Console.WriteLine("Bankkonto: "+name);
+            Console.WriteLine("Bankkonto: " + name);
+        }
+    }
+
+    public struct Transcation
+    {
+        #region Fields
+        DateTime timeOfTransfer;
+        float transaction;
+        Accounts transferAccount;
+        bool plusOrMinus;
+        string changedTransfer;
+        Customer user;
+
+        public DateTime TimeOfTransfer { get => timeOfTransfer; set => timeOfTransfer = value; }
+        public float Transaction { get => transaction; set => transaction = value; }
+        public Accounts TransferAccount { get => transferAccount; set => transferAccount = value; }
+        public bool PlusOrMinus { get => plusOrMinus; set => plusOrMinus = value; }
+        public string ChangedTransfer { get => changedTransfer; set => changedTransfer = value; }
+        internal Customer User { get => user; set => user = value; }
+        #endregion
+
+        public string SavedTransfer()
+        {
+            char mathSign = plusOrMinus ? '+' : '-';
+            return $"{transferAccount._Name}\t {changedTransfer}\t {mathSign}{transaction} {transferAccount._Currency}";
+        }
+    }
+
+    public struct Calculation
+    {
+        #region Fields
+        private Accounts recieveAccount, sendAccount;
+        private float moneyAmount;
+
+        public Accounts RecieveAccount { get => recieveAccount; set => recieveAccount = value; }
+        public Accounts SendAccount { get => sendAccount; set => sendAccount = value; }
+        public float MoneyAmount { get => moneyAmount; set => moneyAmount = value; }
+        #endregion 
+
+        public void SetCalculatedBalance()
+        {
+            if (sendAccount == null)
+            {
+                recieveAccount._Balance += moneyAmount;
+                recieveAccount._Balance = (float)Math.Round(recieveAccount._Balance, 2);
+            }
+            else if (recieveAccount == null)
+            {
+                sendAccount._Balance -= moneyAmount;
+                sendAccount._Balance = (float)Math.Round(sendAccount._Balance, 2);
+            }
+            else
+            {
+                sendAccount._Balance -= moneyAmount;
+                sendAccount._Balance = (float)Math.Round(sendAccount._Balance, 2);
+                recieveAccount._Balance += moneyAmount;
+                recieveAccount._Balance = (float)Math.Round(recieveAccount._Balance, 2);
+            }
         }
     }
 }

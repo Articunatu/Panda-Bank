@@ -10,8 +10,30 @@ namespace PandaBank
 
         public void SaveTranscation(float transaction, Accounts transferAccount, bool plusOrMinus, string changedTransfer)
         {
-            char mathSign = plusOrMinus ? '+' : '-';
-            string savedTransfer = $"{transferAccount._Name}\t {changedTransfer}\t {mathSign}{transaction} {transferAccount._Currency}";
+            Transcation savedTransaction = new Transcation();
+            savedTransaction.TimeOfTransfer = DateTime.Now;
+            savedTransaction.PlusOrMinus = plusOrMinus;
+            savedTransaction.TransferAccount = transferAccount;
+            savedTransaction.Transaction = transaction;
+            savedTransaction.ChangedTransfer = changedTransfer;
+            savedTransaction.User = this;
+            BankController.queuedTransactions.Enqueue(savedTransaction);
+        }
+
+        public void SaveCalculations(float moneyAmount, Accounts fromAccount, Accounts toAccount)
+        {
+            Calculation savedCalculation = new Calculation
+            {
+                MoneyAmount = moneyAmount,
+                SendAccount = fromAccount,
+                RecieveAccount = toAccount
+            };
+            BankController.queuedCalculations.Enqueue(savedCalculation);
+        }
+
+        public void ListTransaction(Transcation transcation )
+        {
+            string savedTransfer = transcation.SavedTransfer();
             Transactions.Add(savedTransfer);
         }
 
@@ -81,9 +103,9 @@ namespace PandaBank
                 Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig summa på: " + Math.Round(YearlyAmount, 2));
             }
 
-            depositAccount._Balance += moneyAmount;
-            depositAccount.PrintInfo();
+            SaveCalculations(moneyAmount, null, depositAccount);
             SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat");
+            Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
 
         public void WithdrawMoney()
@@ -117,9 +139,9 @@ namespace PandaBank
             }
             while (isException);
 
-            withdrawAccount._Balance -= moneyAmount;
-            withdrawAccount.PrintInfo();
+            SaveCalculations(moneyAmount, withdrawAccount, null);
             SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag genom bankomat");
+            Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
 
         public float IntrestAmount()
@@ -130,7 +152,6 @@ namespace PandaBank
             decimal YearlyAmount = IntrestRate * InsertedAmount;
             Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
             return (float)InsertedAmount; 
-
         }
 
         public void Loan()

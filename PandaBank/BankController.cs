@@ -6,7 +6,7 @@ namespace PandaBank
 {
     struct BankController
     {
-        internal void Start() 
+        internal void Start()
         {
             Admin a = new Admin();
             a.AdminSetup();
@@ -51,7 +51,7 @@ namespace PandaBank
                     } while (keyPassword != ConsoleKey.Enter);
 
                     if (userAnswer == a.userName && userPass == a.password)
-                    {                     
+                    {
                         SignInAdmin(a, ListOfCustomers);
                         break;
                     }
@@ -93,9 +93,11 @@ namespace PandaBank
 
         private static void SignInMetod(Admin a, Customer loginUser, List<Customer> customers)
         {
+
             bool Online = true;
             while (Online)
             {
+                Timer();
                 Console.Clear();
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
@@ -184,6 +186,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                         break;
                     case 8:
                         loginUser.ShowTransactions();
+                        //foreach (var item in queuedTransactions)
+                        //{
+                        //    Console.WriteLine(item.SavedTransfer());
+                        //}
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -242,6 +248,30 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                     SignInAdmin(a, customers);
                     break;
             }
+        }
+
+        public static Queue<Transcation> queuedTransactions = new Queue<Transcation>();
+        public static Queue<Calculation> queuedCalculations = new Queue<Calculation>();
+
+        private static void Timer()
+        {
+            if (queuedTransactions.Count > 0)
+            {
+                int lengthQueue = queuedTransactions.Count;
+                for (int i = 0; i < lengthQueue; i++)
+                {
+                    if (queuedTransactions.Peek().TimeOfTransfer.AddSeconds(5) <= DateTime.Now)
+                    {
+                        queuedTransactions.Peek().User.ListTransaction(queuedTransactions.Dequeue());
+                        if (queuedCalculations.Count > 0)
+                        {
+                            queuedCalculations.Dequeue().SetCalculatedBalance();
+                        }
+                    }
+                }
+
+            }
+            else { }
         }
     }
 }
