@@ -213,6 +213,7 @@ namespace PandaBank
         }
         public void ChangePassword()
         {
+            Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver samt innehålla minst 8 tecken ");
             Console.Write("Ange ett nytt Lösenord: ");
 
             string passwordCreated = Console.ReadLine();
