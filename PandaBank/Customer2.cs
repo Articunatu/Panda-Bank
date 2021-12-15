@@ -39,6 +39,7 @@ namespace PandaBank
 
         public void ShowTransactions()
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             foreach (string transaction in Transactions)
             {
                 Console.WriteLine(transaction);
@@ -68,16 +69,20 @@ namespace PandaBank
         public void DepositMoney()
         {
             ShoweAccounts();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj ett konto att sätta in pengar på: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string depositText = Console.ReadLine();
             Accounts depositAccount = ListOfAccounts.Find(s => s._Name == depositText);
             while (depositAccount == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltigt konto! Vänligen skriv in ett nytt: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 depositText = Console.ReadLine();
                 depositAccount = ListOfAccounts.Find(s => s._Name == depositText);
             }
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Skriv hur mycket pengar du vill sätta in: ");
             float moneyAmount = 0;
             bool isException = false;
@@ -85,11 +90,13 @@ namespace PandaBank
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     moneyAmount = float.Parse(Console.ReadLine());
                     isException = false;
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                     isException = true;
                 }
@@ -100,27 +107,33 @@ namespace PandaBank
             {
                 decimal IntrestRate = 0.01M;
                 decimal YearlyAmount = IntrestRate * (decimal)moneyAmount;
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig summa på: " + Math.Round(YearlyAmount, 2));
             }
 
             SaveCalculations(moneyAmount, null, depositAccount);
             SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
 
         public void WithdrawMoney()
         {
             ShoweAccounts();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj ett konto att ta ut pengar ifrån: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string withdrawText = Console.ReadLine();
             Accounts withdrawAccount = ListOfAccounts.Find(s => s._Name == withdrawText);
             while (withdrawAccount == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltigt konto! Vänligen skriv in ett nytt: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 withdrawText = Console.ReadLine();
                 withdrawAccount = ListOfAccounts.Find(s => s._Name == withdrawText);
             }
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Skriv hur mycket pengar vill du ta ut: ");
             float moneyAmount = 0;
             bool isException = false;
@@ -128,11 +141,13 @@ namespace PandaBank
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     moneyAmount = float.Parse(Console.ReadLine());
                     isException = false;
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                     isException = true;
                 }
@@ -141,22 +156,28 @@ namespace PandaBank
 
             SaveCalculations(moneyAmount, withdrawAccount, null);
             SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag genom bankomat");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
 
         public float IntrestAmount()
         {
             decimal IntrestRate = 0.01M;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Skriv hur mycket vill du sätta in: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             decimal InsertedAmount = Convert.ToDecimal(Console.ReadLine());
             decimal YearlyAmount = IntrestRate * InsertedAmount;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
             return (float)InsertedAmount; 
         }
 
         public void Loan()
         {
-            Console.WriteLine("I vilken valuta Svenska kronor: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Valbara valutor:  Svenska kronor: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR ");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj valuta: ");
             bool isException = true;
             string chooseCurrency = "";
@@ -164,12 +185,14 @@ namespace PandaBank
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     chooseCurrency = Console.ReadLine().ToUpper();
                     Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
                     isException = false;
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltig valuta, vänligen skriv in en ny: ");
                     isException = true;
                 }
@@ -179,8 +202,11 @@ namespace PandaBank
             {
                 Moneylimit += item._Balance;
             }
+            Console.ForegroundColor = ConsoleColor.Yellow;
             decimal MoneyLimit2 = Convert.ToDecimal(Moneylimit);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Totalt kan man låna fem gånger så mycket pengar som man själv äger (summan av alla ens kontons saldon).");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Skriv in hur mycket du vill låna: ");
             decimal BorrowAmount = 0;
             isException = true;
@@ -188,11 +214,13 @@ namespace PandaBank
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     BorrowAmount = Convert.ToDecimal(Console.ReadLine());
                     isException = false;
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen välj nytt belopp: ");
                     isException = true;
                 }
@@ -201,34 +229,46 @@ namespace PandaBank
             MoneyLimit2 = MoneyLimit2*5;
             while (BorrowAmount > MoneyLimit2)
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("Du har för lite pengar för att låna så mycket");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Skriv in et nytyt belopp på hur mycket du vill låna: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 BorrowAmount = Convert.ToDecimal(Console.ReadLine());
             }
 
             decimal LoanintrestRate = 0.10M;
             decimal YearlyIntrest = BorrowAmount * LoanintrestRate;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Kostnaden på lånet blir {0} {1} per år, vid en ränta på {2}%.", YearlyIntrest, chooseCurrency, LoanintrestRate*100);
             Console.ReadKey();
         }
         public void ChangePassword()
         {
-            Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver samt innehålla minst 8 tecken ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver, samt innehålla minst 8 tecken ");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Ange ett nytt Lösenord: ");
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string passwordCreated = Console.ReadLine();
 
             while(!passwordCreated.Any(char.IsLetter) || !passwordCreated.Any(char.IsNumber))
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Var god ange ett nytt lösenord: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 passwordCreated = Console.ReadLine();
             }
            
             while (passwordCreated.Length < 8)
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("Lösenordet var för kort, det måste innehålla minst 8 tecken.");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Var god ange ett nytt lösenord: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 passwordCreated = Console.ReadLine();
             }
             password = passwordCreated;
