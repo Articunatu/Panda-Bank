@@ -50,21 +50,21 @@ namespace PandaBank
             }
         }
 
-        //Call on CreateAccount instead
-        //public void CreateSavingsAccount()
-        //{
-        //    Console.Write("Namnge sparkonto: ");
-        //    string accountName = Console.ReadLine();
-        //    float accountAm = 0;
-        //    Console.WriteLine("Svenska krona: kr | US dollar: dollar | Brittisk pund: pund | Euro: euro ");
-        //    Console.Write("Välj valuta: ");
-        //    string chooseCurrency = Console.ReadLine();
-        //    Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);  
-        //    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
-        //    createAccounts.IsSavings = true;
-        //    ListOfAccounts.Add(createAccounts);
-        //    Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
-        //}
+        [Obsolete("Use the normal CreateAccoutn method instead!", true)]
+        public void CreateSavingsAccount()
+        {
+            Console.Write("Namnge sparkonto: ");
+            string accountName = Console.ReadLine();
+            float accountAm = 0;
+            Console.WriteLine("Svenska krona: kr | US dollar: dollar | Brittisk pund: pund | Euro: euro ");
+            Console.Write("Välj valuta: ");
+            string chooseCurrency = Console.ReadLine();
+            Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
+            Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
+            createAccounts.IsSavings = true;
+            ListOfAccounts.Add(createAccounts);
+            Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
+        }
 
         public void DepositMoney()
         {
