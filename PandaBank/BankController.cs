@@ -64,7 +64,7 @@ namespace PandaBank
                         Console.WriteLine("Fel användarnamn eller lösenord, skriv in ett nytt:");
                         if (i == 2)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.WriteLine("Du har nått maxgräns försök!");
                             Environment.Exit(0);
                         }
@@ -82,7 +82,7 @@ namespace PandaBank
                         Console.WriteLine("Fel användarnamn eller lösenord, skriv in ett nytt:");
                         if (i == 2)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.WriteLine("Du har nått maxgräns försök!");
                             Environment.Exit(0);
                         }
@@ -129,7 +129,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$.                 $$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$e.              d$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
 ");
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("\n");
                 Console.WriteLine("Välkommen till PandaBanken");
                 int money;
@@ -209,7 +209,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
         private static void SignInAdmin(Admin a, List<Customer> customers)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Välkommen Admin, vad vill du göra?");
             Console.WriteLine("[1] Se en lista över alla användare");
             Console.WriteLine("[2] Skapa en nya användare");
