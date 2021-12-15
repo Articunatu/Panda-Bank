@@ -86,12 +86,10 @@ namespace PandaBank
                     Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                 }
             }
-
             account._Balance -= moneyamount;
             account._Balance = (float)Math.Round(account._Balance, 3);
-            account2._Balance += moneyamount;
+            account2._Balance += (float)ExchangeRate(account, account2, moneyamount);
             account2._Balance = (float)Math.Round(account2._Balance, 3);
-
 
             Console.WriteLine("Uppdaterad info:");
             account.PrintInfo();
@@ -170,8 +168,7 @@ namespace PandaBank
             }
 
             fromAcc._Balance -= amount;
-            toAccount._Balance += amount;
-
+            toAccount._Balance += (float)ExchangeRate(fromAcc, toAccount, amount);
             fromAcc.PrintInfo();
 
             SaveTranscation(amount, fromAcc, false, "Överföring till annan användare");
@@ -179,7 +176,7 @@ namespace PandaBank
         }
         public enum Currency
         {
-            SEK = 1,
+            SEK,
             USD,
             GBP,
             EUR
@@ -191,7 +188,7 @@ namespace PandaBank
             float accountAm = 0;
             Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR");
             Console.Write("Välj valuta: ");
-            string chooseCurrency = "";   
+            string chooseCurrency = "";
             bool isException = true;
             while (isException)
             {
@@ -210,7 +207,7 @@ namespace PandaBank
                         Console.Write("Vill du göra en insättning nu, skriv då JA: ");
                         string depositAnswer = Console.ReadLine().ToUpper();
                         if (depositAnswer == "JA")
-                        {                        
+                        {
                             float InsertedAmount = IntrestAmount();
                             createAccounts._Balance = createAccounts._Balance + InsertedAmount;
                         }
@@ -230,9 +227,88 @@ namespace PandaBank
                 }
             }
         }
-        public void ExchangeRate() //decimal ist för void
+        public decimal ExchangeRate(Accounts firstAccount, Accounts secondAccount, float moneyAmount)
         {
-
+            decimal result = 0;
+            decimal result1 = 0;
+                switch (firstAccount._Currency)
+                {
+                    case "SEK":
+                        if (secondAccount._Currency == "USD")
+                        {
+                            result1 = (decimal)moneyAmount * currencyChange[1];
+                        }
+                        else if (secondAccount._Currency == "GBP")
+                        {
+                            result1 = (decimal)moneyAmount * currencyChange[2];
+                        }
+                        else if (secondAccount._Currency == "EUR")
+                        {
+                            result1 = (decimal)moneyAmount * currencyChange[3];
+                        }
+                        break;
+                    case "USD":
+                        if (secondAccount._Currency == "SEK")
+                        {
+                            result = currencyChange[0] / currencyChange[1];
+                            result1 = (decimal)moneyAmount * result;
+                        }
+                        else if (secondAccount._Currency == "GBP")
+                        {
+                            result = currencyChange[1] / currencyChange[2];
+                            result1 = (decimal)moneyAmount / result;
+                        }
+                        else if (secondAccount._Currency == "EUR")
+                        {
+                            result = currencyChange[1] / currencyChange[3];
+                            result1 = (decimal)moneyAmount / result;
+                        }
+                        break;
+                    case "GBP":
+                        if (secondAccount._Currency == "SEK")
+                        {
+                            result = currencyChange[0] / currencyChange[2];
+                            result1 = (decimal)moneyAmount * result;
+                        }
+                        else if (secondAccount._Currency == "USD")
+                        {
+                            result = currencyChange[2] / currencyChange[1];
+                            result1 = (decimal)moneyAmount / result;
+                        }
+                        else if (secondAccount._Currency == "EUR")
+                        {
+                            result = currencyChange[2] / currencyChange[3];
+                            result1 = (decimal)moneyAmount / result;
+                        }
+                        break;
+                    case "EUR":
+                        if (secondAccount._Currency == "SEK")
+                        {
+                            result = currencyChange[0] / currencyChange[3];
+                            result1 = (decimal)moneyAmount * result;
+                        }
+                        else if (secondAccount._Currency == "USD")
+                        {
+                            result = currencyChange[3] / currencyChange[1];
+                            result1 = (decimal)moneyAmount / result;
+                        }
+                        else if (secondAccount._Currency == "GBP")
+                        {
+                            result = currencyChange[3] / currencyChange[2];
+                            result1 = (decimal)moneyAmount / result;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            if (firstAccount._Currency == secondAccount._Currency)
+            {
+                return (decimal)moneyAmount;
+            }
+            else
+            {
+                return result1;
+            }
         }
     }
 }
