@@ -161,9 +161,9 @@ namespace PandaBank
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
 
-        public float IntrestAmount()
+        public float IntrestAmount(Accounts savAcc)
         {
-            bool isException = true;
+            bool isException;
             decimal IntrestRate = 0.01M;
             decimal InsertedAmount = 0;
             Console.ForegroundColor = ConsoleColor.Green;
@@ -188,7 +188,7 @@ namespace PandaBank
             
             decimal YearlyAmount = IntrestRate * InsertedAmount;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
+            Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig bonus på: " + Math.Round(YearlyAmount, 2) + savAcc._Currency);
             return (float)InsertedAmount; 
         }
 

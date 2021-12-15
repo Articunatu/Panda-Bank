@@ -265,7 +265,7 @@ namespace PandaBank
                         string depositAnswer = Console.ReadLine().ToUpper();
                         if (depositAnswer == "JA")
                         {
-                            float InsertedAmount = IntrestAmount();
+                            float InsertedAmount = IntrestAmount(createAccounts);
                             createAccounts._Balance = createAccounts._Balance + InsertedAmount;
                         }
                     }
@@ -278,13 +278,13 @@ namespace PandaBank
                         string depositAnswer = Console.ReadLine().ToUpper();
                         if (depositAnswer == "JA")
                         {
-                            float InsertedAmount = IntrestAmount();
+                            float InsertedAmount = IntrestAmount(createAccounts);
                             createAccounts._Balance = createAccounts._Balance + InsertedAmount;
                         }
                     }
                     ListOfAccounts.Add(createAccounts);
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
+                    Console.WriteLine(createAccounts._Name + "\t" + createAccounts._Balance + " " + createAccounts._Currency);
                 }
                 catch (Exception)
                 {
