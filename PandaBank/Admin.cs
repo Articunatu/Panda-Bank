@@ -43,27 +43,36 @@ namespace PandaBank
 
         public void CreateCustomer()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Ange Användarnamnet på den nya användaren: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string nameCreated = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Lösenordet måste innehålla både siffror och bokstäver samt innehålla minst 8 tecken ");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Ange ett Lösenordet till den nya användaren: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string passwordCreated = Console.ReadLine();
 
             while (!passwordCreated.Any(char.IsLetter) || !passwordCreated.Any(char.IsDigit))
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Ditt lösenord måste innehålla både siffror och bokstäver");
                 Console.Write("Var god ange ett nytt lösenord: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 passwordCreated = Console.ReadLine();
             }
             while (passwordCreated.Length < 8)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Lösenordet var för kort, det måste innehålla minst 8 tecken.");
                 Console.Write("Var god ange ett nytt lösenord: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 passwordCreated = Console.ReadLine();
             }
             Customer createdCustomer = new Customer(nameCreated, passwordCreated);
             ListOfCustomers.Add(createdCustomer);
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Du har lagt till följande användare: " + createdCustomer.userName + "\nMed lösenordet: " + createdCustomer.password);
         }
         public void UpdateCurrency()
