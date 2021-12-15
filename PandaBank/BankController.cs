@@ -210,6 +210,16 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(" /$$$$$$$                            /$$                /$$$$$$$                      /$$                          ");
+            Console.WriteLine("| $$__  $$                           |$$               | $$__  $$                    | $$                          ");
+            Console.WriteLine("| $$   |$$   /$$$$$$  /$$$$$$$   /$$$$$$$  /$$$$$$     | $$  |$$   /$$$$$$  /$$$$$$$ | $$   /$$  /$$$$$$  /$$$$$$$ ");
+            Console.WriteLine("| $$$$$$$/|  ___  $$| $$__  $$ /$$__  $$ | ____ $$     | $$$$$$$  | ____ $$| $$__  $$| $$  /$$/ /$$__  $$| $$__  $$");
+            Console.WriteLine("| $$____ /  /$$$$$$$| $$  | $$| $$  | $$  /$$$$$$$     | $$__  $$  /$$$$$$$| $$  | $$| $$$$$$/ | $$$$$$$$| $$  | $$");
+            Console.WriteLine("| $$       /$$__  $$| $$  | $$| $$  | $$ /$$__  $$     | $$  | $$ /$$__  $$| $$  | $$| $$_  $$ | $$_____/| $$  | $$");
+            Console.WriteLine("| $$       | $$$$$$$| $$  | $$|  $$$$$$$|  $$$$$$$     | $$$$$$$/|  $$$$$$$| $$  | $$| $$ |  $$|  $$$$$$$| $$  | $$");
+            Console.WriteLine("|__/       |_______/ |__/  |__/ |_______/ |_______/    |_______/  |_______/|__/  |__/|__/  |__/ |_______/|__/  |__/");
+            Console.WriteLine();
+            
             Console.WriteLine("Välkommen Admin, vad vill du göra?");
             Console.WriteLine("[1] Se en lista över alla användare");
             Console.WriteLine("[2] Skapa en nya användare");
