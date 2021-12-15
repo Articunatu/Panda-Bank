@@ -115,7 +115,7 @@ namespace PandaBank
             SaveCalculations(moneyAmount, 0, null, depositAccount);
             SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat\t\t");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
+            Console.WriteLine("Uppdatering går igenom om 15 sekunder!");
         }
 
         public void WithdrawMoney()
@@ -158,7 +158,7 @@ namespace PandaBank
             SaveCalculations(moneyAmount, 0, withdrawAccount, null);
             SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag från bankomat\t\t");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
+            Console.WriteLine("Uppdatering går igenom om 15 sekunder!");
         }
 
         public float IntrestAmount(Accounts savAcc)

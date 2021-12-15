@@ -271,7 +271,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 int lengthQueue = queuedTransactions.Count;
                 for (int i = 0; i < lengthQueue; i++)
                 {
-                    if (queuedTransactions.Peek().TimeOfTransfer.AddSeconds(5) <= DateTime.Now)
+                    if (queuedTransactions.Peek().TimeOfTransfer.AddSeconds(15) <= DateTime.Now)
                     {
                         queuedTransactions.Peek().User.ListTransaction(queuedTransactions.Dequeue());
                         if (queuedCalculations.Count > 0)
