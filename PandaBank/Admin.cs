@@ -19,6 +19,9 @@ namespace PandaBank
         Accounts a5 = new Accounts("Privat", 5500, "SEK");
         Accounts a6 = new Accounts("Investeringar", 99999, "SEK");
 
+        public List<Customer> ListOfCustomers = new List<Customer>();
+
+
         public void AdminSetup()
         {
             U1.AddAccounts(a1); U1.AddAccounts(a2);  //First user's accounts
@@ -69,6 +72,7 @@ namespace PandaBank
             bool myBool = true;
             while (myBool)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Nuvarande värde på valutan:");
                 Console.WriteLine(Customer.Currency.SEK + " " + L.currencyChange[0]);
                 Console.WriteLine(Customer.Currency.USD + " " + L.currencyChange[1]);
@@ -77,12 +81,17 @@ namespace PandaBank
                 Console.WriteLine();
                 Console.WriteLine("Välj valuta som du vill ändra värdet på! \nSvenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR" +
                     "\nFör att avsluta, vänligen skriv X");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Valuta: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 string changeValue = Console.ReadLine().ToUpper();
+                Console.ForegroundColor = ConsoleColor.Green;
                 switch (changeValue)
                 {
+                    
                     case "SEK":
                         Console.Write("Vad är det nya värdet? ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue = Console.ReadLine();
                         decimal deciValue = Convert.ToDecimal(chooseNewValue);
                         L.currencyChange[0] = deciValue;
@@ -90,6 +99,7 @@ namespace PandaBank
                         break;
                     case "USD":
                         Console.Write("Vad är det nya värdet? ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue1 = Console.ReadLine();
                         decimal deciValue1 = Convert.ToDecimal(chooseNewValue1);
                         L.currencyChange[1] = deciValue1;
@@ -97,6 +107,7 @@ namespace PandaBank
                         break;
                     case "GBP":
                         Console.Write("Vad är det nya värdet? ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue2 = Console.ReadLine();
                         decimal deciValue2 = Convert.ToDecimal(chooseNewValue2);
                         L.currencyChange[2] = deciValue2;
@@ -104,12 +115,14 @@ namespace PandaBank
                         break;
                     case "EUR":
                         Console.Write("Vad är det nya värdet? ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue3 = Console.ReadLine();
                         decimal deciValue3 = Convert.ToDecimal(chooseNewValue3);
                         L.currencyChange[3] = deciValue3;
                         Console.WriteLine();
                         break;
                     case "X":
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Ny värde på valutor:");
                         Console.WriteLine(Customer.Currency.SEK + " " + L.currencyChange[0]);
                         Console.WriteLine(Customer.Currency.USD + " " + L.currencyChange[1]);
@@ -120,6 +133,7 @@ namespace PandaBank
                         Console.Clear();
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Vänligen välj giltig valuta!");
                         break;
                 }
@@ -127,26 +141,4 @@ namespace PandaBank
 
         }
     }
-    //    public object A()
-
-    //{
-    //    LoginUser Ad = new LoginUser() { userName = "Admin", password = "1234" };
-    //    LoginUser U1 = new LoginUser() { userName = "Hanna", password = "0000" };
-    //    LoginUser U2 = new LoginUser() { userName = "Daniel", password = "1111" };
-
-    //    List<LoginUser> ListUser = new List<LoginUser>();
-    //    ListUser.Add(Ad);
-    //    ListUser.Add(U1);
-    //    ListUser.Add(U2);
-    //    return ListUser;
-    //}
-
-
-    //public Customer AddCustomer(List<Accounts> _ListofAccounts, string _userName, string _password)
-    //{
-
-    //    userName = _userName;
-    //    password = _password;
-    //    ListOfAccounts = _ListofAccounts;
-    //}
 }

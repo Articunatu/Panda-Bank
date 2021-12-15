@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PandaBank
 {
-    class Program
+    struct Program
     {
         static void Main()
         {
