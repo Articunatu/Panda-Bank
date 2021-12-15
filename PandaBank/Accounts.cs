@@ -41,7 +41,7 @@ namespace PandaBank
 
         public void PrintAccountName()
         {
-            Console.WriteLine("Bankkonto: " + name);
+            Console.WriteLine(name);
         }
     }
 

@@ -156,10 +156,10 @@ namespace PandaBank
                 toUser2 = ListUser.Find(u => u.userName == toUser);
             }
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Välj konto att skicka till\n");
+            Console.WriteLine($"\n{toUser2.userName}s konton: ");
             toUser2.ShoweAccountsNames();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Konto: ");
+            Console.Write("Välj ett konto: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             string toAcc = Console.ReadLine();
             Accounts toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
@@ -172,7 +172,7 @@ namespace PandaBank
                 toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             }
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Välj summa att överföra: ");
+            Console.Write("Välj belopp att överföra: ");
             float amount = 0;
             bool isException = false;
             do
@@ -272,6 +272,15 @@ namespace PandaBank
                     else
                     {
                         createAccounts.IsSavings = false;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("Vill du göra en insättning nu, skriv då JA: ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        string depositAnswer = Console.ReadLine().ToUpper();
+                        if (depositAnswer == "JA")
+                        {
+                            float InsertedAmount = IntrestAmount();
+                            createAccounts._Balance = createAccounts._Balance + InsertedAmount;
+                        }
                     }
                     ListOfAccounts.Add(createAccounts);
                     Console.ForegroundColor = ConsoleColor.DarkCyan;

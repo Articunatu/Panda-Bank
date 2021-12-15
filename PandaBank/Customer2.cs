@@ -109,11 +109,11 @@ namespace PandaBank
                 decimal IntrestRate = 0.01M;
                 decimal YearlyAmount = IntrestRate * (decimal)moneyAmount;
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig summa på: " + Math.Round(YearlyAmount, 2));
+                Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig bonus på: " + Math.Round(YearlyAmount, 2));
             }
 
             SaveCalculations(moneyAmount, 0, null, depositAccount);
-            SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat");
+            SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat\t\t");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
@@ -156,7 +156,7 @@ namespace PandaBank
             while (isException);
 
             SaveCalculations(moneyAmount, 0, withdrawAccount, null);
-            SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag genom bankomat");
+            SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag från bankomat\t\t");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
         }
