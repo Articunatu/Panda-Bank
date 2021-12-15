@@ -133,15 +133,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 Console.WriteLine("\n");
                 Console.WriteLine("Välkommen till PandaBanken");
                 int money;
-                Console.WriteLine("[1] Visa Konton");
-                Console.WriteLine("[2] Överför Pengar Mellan Konton");
-                Console.WriteLine("[3] Överför Pengar Till Andra Användare");
-                Console.WriteLine("[4] Skapa Konto");
-                Console.WriteLine("[5] Sätt In Pengar");
-                Console.WriteLine("[6] Ta Ut Pengar");
-                Console.WriteLine("[7] Låna Pengar");
-                Console.WriteLine("[8] Visa transaktioner");
-                Console.WriteLine("[9] Byt lösenord");
+                Console.WriteLine("[1]  Visa Konton");
+                Console.WriteLine("[2]  Överför Pengar Mellan Konton");
+                Console.WriteLine("[3]  Överför Pengar Till Andra Användare");
+                Console.WriteLine("[4]  Skapa Konto");
+                Console.WriteLine("[5]  Sätt In Pengar");
+                Console.WriteLine("[6]  Ta Ut Pengar");
+                Console.WriteLine("[7]  Låna Pengar");
+                Console.WriteLine("[8]  Visa transaktioner");
+                Console.WriteLine("[9]  Byt lösenord");
                 Console.WriteLine("[10] Logga ut");
                 Console.Write("");
                 Int32.TryParse(Console.ReadLine(), out money);
@@ -261,6 +261,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
         }
 
         public static Queue<Transcation> queuedTransactions = new Queue<Transcation>();
+
         public static Queue<Calculation> queuedCalculations = new Queue<Calculation>();
 
         private static void Timer()

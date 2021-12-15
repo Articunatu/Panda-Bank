@@ -7,17 +7,17 @@ namespace PandaBank
 {
     class Admin : LoginUser
     {
-        #region Fields
+        #region Customers & BankAccounts
         Customer U1 = new Customer("Hanna", "0000");
         Customer U2 = new Customer("Daniel", "1111");
         Customer U3 = new Customer("Emma", "2222");
 
-        Accounts a1 = new Accounts("Spar", 44000, "SEK");
-        Accounts a2 = new Accounts("Lön", 22998, "SEK");
-        Accounts a3 = new Accounts("Fond", 33711, "SEK");
-        Accounts a4 = new Accounts("Aktie", 11000, "SEK");
-        Accounts a5 = new Accounts("Privat", 5500, "SEK");
-        Accounts a6 = new Accounts("Investeringar", 99999, "SEK");
+        Accounts a1 = new Accounts("Spar", 50000.01f, "SEK");
+        Accounts a2 = new Accounts("Lön", 20000.4f, "EUR");
+        Accounts a3 = new Accounts("Fond", 30000.00f, "SEK");
+        Accounts a4 = new Accounts("Aktie", 10000.00f, "SEK");
+        Accounts a5 = new Accounts("Privat", 4000.66f, "SEK");
+        Accounts a6 = new Accounts("Investeringar", 99999.02f, "SEK");
         #endregion
 
         public List<Customer> ListOfCustomers = new List<Customer>();
@@ -75,6 +75,7 @@ namespace PandaBank
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Du har lagt till följande användare: " + createdCustomer.userName + "\nMed lösenordet: " + createdCustomer.password);
         }
+
         public void UpdateCurrency()
         {
             LoginUser L = new LoginUser();

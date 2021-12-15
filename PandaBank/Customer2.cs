@@ -20,11 +20,12 @@ namespace PandaBank
             BankController.queuedTransactions.Enqueue(savedTransaction);
         }
 
-        public void SaveCalculations(float moneyAmount, Accounts fromAccount, Accounts toAccount)
+        public void SaveCalculations(float sendAmount, float recieveAmount, Accounts fromAccount, Accounts toAccount)
         {
             Calculation savedCalculation = new Calculation
             {
-                MoneyAmount = moneyAmount,
+                RecieveAmount = recieveAmount,
+                SendAmount = sendAmount,
                 SendAccount = fromAccount,
                 RecieveAccount = toAccount
             };
@@ -50,7 +51,7 @@ namespace PandaBank
             }
         }
 
-        [Obsolete("Use the normal CreateAccoutn method instead!", true)]
+        [Obsolete("Use the normal CreateAccount method instead!", true)]
         public void CreateSavingsAccount()
         {
             Console.Write("Namnge sparkonto: ");
@@ -111,7 +112,7 @@ namespace PandaBank
                 Console.WriteLine("Om räntan är " + IntrestRate*100 + "% kommer du att få en årlig summa på: " + Math.Round(YearlyAmount, 2));
             }
 
-            SaveCalculations(moneyAmount, null, depositAccount);
+            SaveCalculations(moneyAmount, 0, null, depositAccount);
             SaveTranscation(moneyAmount, depositAccount, true, "Insättning på bankomat");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
@@ -154,7 +155,7 @@ namespace PandaBank
             }
             while (isException);
 
-            SaveCalculations(moneyAmount, withdrawAccount, null);
+            SaveCalculations(moneyAmount, 0, withdrawAccount, null);
             SaveTranscation(moneyAmount, withdrawAccount, false, "Uttag genom bankomat");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Uppdatering går igenom om 5 sekunder!");
@@ -162,11 +163,29 @@ namespace PandaBank
 
         public float IntrestAmount()
         {
+            bool isException = true;
             decimal IntrestRate = 0.01M;
+            decimal InsertedAmount = 0;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Skriv hur mycket vill du sätta in: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            decimal InsertedAmount = Convert.ToDecimal(Console.ReadLine());
+            do
+            {
+                try
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    InsertedAmount = Convert.ToDecimal(Console.ReadLine());
+                    isException = false;
+                }
+                catch (Exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
+                    isException = true;
+                }
+
+            } while (isException);
+            
             decimal YearlyAmount = IntrestRate * InsertedAmount;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Om ränta är " + IntrestRate + " kommer du att få en årlig summa på:" + YearlyAmount);
@@ -176,6 +195,7 @@ namespace PandaBank
         public void Loan()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Här kan du få reda på hur många procent ränta du får på ett lån från Pandabanken.");
             Console.WriteLine("Valbara valutor:  Svenska kronor: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj valuta: ");
@@ -243,6 +263,7 @@ namespace PandaBank
             Console.WriteLine("Kostnaden på lånet blir {0} {1} per år, vid en ränta på {2}%.", YearlyIntrest, chooseCurrency, LoanintrestRate*100);
             Console.ReadKey();
         }
+
         public void ChangePassword()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;

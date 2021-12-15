@@ -20,11 +20,20 @@ namespace PandaBank
 
         public void ShoweAccounts()
         {
-            foreach (var item in ListOfAccounts)
+            if (ListOfAccounts.Count > 0)
             {
-                item.PrintInfo();
+                foreach (var item in ListOfAccounts)
+                {
+                    item.PrintInfo();
+                }
             }
+            else
+            {
+                Console.WriteLine("Du har inga konton...");
+            }
+            
         }
+
         public void ShoweAccountsNames()
         {
             foreach (var item in ListOfAccounts)
@@ -35,38 +44,47 @@ namespace PandaBank
 
         public void TransferAccounts()
         {
-            Console.WriteLine("Välj ett konto att föra över pengar från:");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Välj ett konto att föra över pengar från: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string sendAccount = Console.ReadLine();
             Accounts account = ListOfAccounts.Find(s => s._Name == sendAccount);
             while (account == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltigt konto! Vänligen skriv in ett nytt: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 sendAccount = Console.ReadLine();
                 account = ListOfAccounts.Find(s => s._Name == sendAccount);
             }
-
-            Console.WriteLine("Välj sen ett konto att föra över pengar till:");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Välj sen ett konto att föra över pengar till: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string recieveAccount = Console.ReadLine();
             Accounts account2 = ListOfAccounts.Find(r => r._Name == recieveAccount);
             while (account2 == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltigt konto! Vänligen skriv in ett nytt: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 recieveAccount = Console.ReadLine();
                 account2 = ListOfAccounts.Find(r => r._Name == recieveAccount);
             }
-
-            Console.WriteLine("Hur mycket pengar vill du föra över?");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Skriv hur mycket pengar du vill överföra: ");
             float moneyamount = 0;
             bool isException = false;
             do
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     moneyamount = float.Parse(Console.ReadLine());
                     isException = false;
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                     isException = true;
                 }
@@ -75,66 +93,85 @@ namespace PandaBank
 
             while (moneyamount > account._Balance)
             {
-                Console.Write("Det finns för lite pengar på kontot...\nSkriv in ett nytt belopp: ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Det finns för lite pengar på kontot...");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Skriv in ett nytt belopp: ");
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     moneyamount = float.Parse(Console.ReadLine());
 
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                 }
             }
-            account._Balance -= moneyamount;
-            account._Balance = (float)Math.Round(account._Balance, 3);
-            account2._Balance += (float)ExchangeRate(account, account2, moneyamount);
-            account2._Balance = (float)Math.Round(account2._Balance, 3);
+            //account._Balance -= moneyamount;
+            //account._Balance = (float)Math.Round(account._Balance, 3);
+            //account2._Balance += (float)ExchangeRate(account, account2, moneyamount);
+            //account2._Balance = (float)Math.Round(account2._Balance, 3);
 
-            Console.WriteLine("Uppdaterad info:");
-            account.PrintInfo();
-            account2.PrintInfo();
+            //Console.ForegroundColor = ConsoleColor.DarkCyan;
+            //Console.WriteLine("Uppdaterad info:");
+            //account.PrintInfo();
+            //account2.PrintInfo();
 
-            SaveTranscation(moneyamount, account, false, "Överföring till annat konto");
-            SaveTranscation(moneyamount, account2, true, "Överföring från annat konto");
+            SaveCalculations(moneyamount, (float)ExchangeRate(account, account2, moneyamount), account, account2);
+            SaveTranscation(moneyamount, account, false, $"Överföring till annat konto: {account2._Name}");
+            SaveTranscation((float)ExchangeRate(account, account2, moneyamount), account2, true, $"Överföring från annat konto: {account._Name}");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Transaktionerna går egenom om 15 sekunder.");
         }
+
         public void TransferMoneyToUser(List<Customer> ListUser)
         {
-            Console.WriteLine("Välj ett konto att överföra pengar från: ");
-            Console.WriteLine(" ");
             ShoweAccounts();
-            Console.Write("Konto: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Välj ett konto att överföra pengar från: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string fromAccount = Console.ReadLine();
             Accounts fromAcc = ListOfAccounts.Find(s => s._Name == fromAccount);
             while (fromAcc == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 fromAccount = Console.ReadLine();
                 fromAcc = ListOfAccounts.Find(s => s._Name == fromAccount);
             }
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Skriv användare att skicka pengar till: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string toUser = Console.ReadLine();
             Customer toUser2 = ListUser.Find(u => u.userName == toUser);
             while (toUser2 == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltig användare! Skriv in en ny: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 toUser = Console.ReadLine();
                 toUser2 = ListUser.Find(u => u.userName == toUser);
             }
-
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Välj konto att skicka till\n");
             toUser2.ShoweAccountsNames();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Konto: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string toAcc = Console.ReadLine();
             Accounts toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             while (toAccount == null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltigt konto! Skriv in ett nytt: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 toAcc = Console.ReadLine();
                 toAccount = toUser2.ListOfAccounts.Find(s => s._Name == toAcc);
             }
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj summa att överföra: ");
             float amount = 0;
             bool isException = false;
@@ -142,11 +179,13 @@ namespace PandaBank
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     amount = float.Parse(Console.ReadLine());
                     isException = false;
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Skriv in ett nytt belopp: ");
                     TransferMoneyToUser(ListUser);
                     isException = true;
@@ -156,24 +195,31 @@ namespace PandaBank
 
             while (amount > fromAcc._Balance)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Otillräckligt belopp på konto! Vänligen välj nytt belopp: ");
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     amount = float.Parse(Console.ReadLine());
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen välj nytt belopp: ");
                 }
             }
 
-            fromAcc._Balance -= amount;
-            toAccount._Balance += (float)ExchangeRate(fromAcc, toAccount, amount);
-            fromAcc.PrintInfo();
+            //fromAcc._Balance -= amount;
+            //toAccount._Balance += (float)ExchangeRate(fromAcc, toAccount, amount);
+            //fromAcc.PrintInfo();
 
-            SaveTranscation(amount, fromAcc, false, "Överföring till annan användare");
-            toUser2.SaveTranscation(amount, toAccount, true, "Överföring från annan användare");
+            SaveTranscation(amount, fromAcc, false, $"Överföring till användare: {toUser2.userName}");
+            toUser2.SaveTranscation((float)ExchangeRate(fromAcc, toAccount, amount), toAccount, true, $"Överföring från användare: {this.userName}");
+            SaveCalculations(amount, (float)ExchangeRate(fromAcc, toAccount, amount), fromAcc, toAccount);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Transaktionerna går egenom om 15 sekunder.");
         }
+
         public enum Currency
         {
             SEK,
@@ -181,12 +227,17 @@ namespace PandaBank
             GBP,
             EUR
         }
+
         public void CreateAccount()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Namnge konto: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string accountName = Console.ReadLine();
             float accountAm = 0;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Svenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj valuta: ");
             string chooseCurrency = "";
             bool isException = true;
@@ -194,17 +245,23 @@ namespace PandaBank
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     chooseCurrency = Console.ReadLine().ToUpper();
                     Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
                     isException = false;
-                    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
+                    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);   
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ska det vara ett sparkonto, skriv då JA: ");
-                    string binaryAnswer = Console.ReadLine().ToUpper();
-                    if (binaryAnswer == "JA")
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    string savingsAnswer = Console.ReadLine().ToUpper();
+                    if (savingsAnswer == "JA")
                     {
                         createAccounts.IsSavings = true;
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write("Vill du göra en insättning nu, skriv då JA: ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         string depositAnswer = Console.ReadLine().ToUpper();
                         if (depositAnswer == "JA")
                         {
@@ -217,16 +274,18 @@ namespace PandaBank
                         createAccounts.IsSavings = false;
                     }
                     ListOfAccounts.Add(createAccounts);
-
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine(createAccounts._Name + " " + createAccounts._Balance + " " + createAccounts._Currency);
                 }
                 catch (Exception)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ogiltigt format! Vänligen välj giltig valuta: ");
                     isException = true;
                 }
             }
         }
+
         public decimal ExchangeRate(Accounts firstAccount, Accounts secondAccount, float moneyAmount)
         {
             decimal result = 0;
