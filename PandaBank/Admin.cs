@@ -12,8 +12,8 @@ namespace PandaBank
         Customer U2 = new Customer("Daniel", "1111");
         Customer U3 = new Customer("Emma", "2222");
 
-        Accounts a1 = new Accounts("Spar", 50000.01f, "SEK");
-        Accounts a2 = new Accounts("Lön", 20000.4f, "EUR");
+        Accounts a1 = new Accounts("Spar", 50000.00f, "SEK");
+        Accounts a2 = new Accounts("Lön", 20000f, "EUR");
         Accounts a3 = new Accounts("Fond", 30000.00f, "SEK");
         Accounts a4 = new Accounts("Aktie", 10000.00f, "SEK");
         Accounts a5 = new Accounts("Privat", 4000.66f, "SEK");
@@ -34,7 +34,6 @@ namespace PandaBank
 
         public void ShowCustomers()
         {
-
             foreach (var customer in ListOfCustomers)
             {
                 Console.WriteLine("Användare: " + customer.userName + ", Antal konton: " + customer.ListOfAccounts.Count);
@@ -78,16 +77,15 @@ namespace PandaBank
 
         public void UpdateCurrency()
         {
-            LoginUser L = new LoginUser();
             bool myBool = true;
             while (myBool)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Nuvarande värde på valutan:");
-                Console.WriteLine(Customer.Currency.SEK + " " + L.currencyChange[0]);
-                Console.WriteLine(Customer.Currency.USD + " " + L.currencyChange[1]);
-                Console.WriteLine(Customer.Currency.GBP + " " + L.currencyChange[2]);
-                Console.WriteLine(Customer.Currency.EUR + " " + L.currencyChange[3]);
+                Console.WriteLine(Customer.Currency.SEK + " " + currencyChange[0]);
+                Console.WriteLine(Customer.Currency.USD + " " + currencyChange[1]);
+                Console.WriteLine(Customer.Currency.GBP + " " + currencyChange[2]);
+                Console.WriteLine(Customer.Currency.EUR + " " + currencyChange[3]);
                 Console.WriteLine();
                 Console.WriteLine("Välj valuta som du vill ändra värdet på! \nSvenska krona: SEK | US dollar: USD | Brittisk pund: GBP | Euro: EUR" +
                     "\nFör att avsluta, vänligen skriv X");
@@ -104,7 +102,7 @@ namespace PandaBank
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue = Console.ReadLine();
                         decimal deciValue = Convert.ToDecimal(chooseNewValue);
-                        L.currencyChange[0] = deciValue;
+                        currencyChange[0] = deciValue;
                         Console.WriteLine();
                         break;
                     case "USD":
@@ -112,7 +110,7 @@ namespace PandaBank
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue1 = Console.ReadLine();
                         decimal deciValue1 = Convert.ToDecimal(chooseNewValue1);
-                        L.currencyChange[1] = deciValue1;
+                        currencyChange[1] = deciValue1;
                         Console.WriteLine();
                         break;
                     case "GBP":
@@ -120,7 +118,7 @@ namespace PandaBank
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue2 = Console.ReadLine();
                         decimal deciValue2 = Convert.ToDecimal(chooseNewValue2);
-                        L.currencyChange[2] = deciValue2;
+                        currencyChange[2] = deciValue2;
                         Console.WriteLine();
                         break;
                     case "EUR":
@@ -128,16 +126,16 @@ namespace PandaBank
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         string chooseNewValue3 = Console.ReadLine();
                         decimal deciValue3 = Convert.ToDecimal(chooseNewValue3);
-                        L.currencyChange[3] = deciValue3;
+                        currencyChange[3] = deciValue3;
                         Console.WriteLine();
                         break;
                     case "X":
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Ny värde på valutor:");
-                        Console.WriteLine(Customer.Currency.SEK + " " + L.currencyChange[0]);
-                        Console.WriteLine(Customer.Currency.USD + " " + L.currencyChange[1]);
-                        Console.WriteLine(Customer.Currency.GBP + " " + L.currencyChange[2]);
-                        Console.WriteLine(Customer.Currency.EUR + " " + L.currencyChange[3]);
+                        Console.WriteLine(Customer.Currency.SEK + " " + currencyChange[0]);
+                        Console.WriteLine(Customer.Currency.USD + " " + currencyChange[1]);
+                        Console.WriteLine(Customer.Currency.GBP + " " + currencyChange[2]);
+                        Console.WriteLine(Customer.Currency.EUR + " " + currencyChange[3]);
                         myBool = false;
                         Console.ReadLine();
                         Console.Clear();
