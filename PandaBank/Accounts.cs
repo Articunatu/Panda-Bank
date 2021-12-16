@@ -56,7 +56,7 @@ namespace PandaBank
         Customer user;
 
         public DateTime TimeOfTransfer { get => timeOfTransfer; set => timeOfTransfer = value; }
-        public float Transaction { get => transaction; set => transaction = value; }
+        public float MoneyAmount { get => transaction; set => transaction = value; }
         public Accounts TransferAccount { get => transferAccount; set => transferAccount = value; }
         public bool PlusOrMinus { get => plusOrMinus; set => plusOrMinus = value; }
         public string ChangedTransfer { get => changedTransfer; set => changedTransfer = value; }
@@ -84,17 +84,17 @@ namespace PandaBank
 
         public void SetCalculatedBalance()
         {
-            if (sendAccount == null)
+            if (sendAccount == null)///Deposit Money
             {
-                recieveAccount._Balance +=  sendAmount;
+                recieveAccount._Balance +=  sendAmount; 
                 recieveAccount._Balance = (float)Math.Round(recieveAccount._Balance, 2);
             }
-            else if (recieveAccount == null)
+            else if (recieveAccount == null)///Withdraw Money
             {
-                sendAccount._Balance -= sendAmount;
+                sendAccount._Balance -= sendAmount;  
                 sendAccount._Balance = (float)Math.Round(sendAccount._Balance, 2);
             }
-            else
+            else///Transcations between accounts
             {
                 sendAccount._Balance -= sendAmount;
                 sendAccount._Balance = (float)Math.Round(sendAccount._Balance, 2);

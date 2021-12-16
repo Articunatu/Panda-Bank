@@ -109,6 +109,8 @@ namespace PandaBank
                     Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
                 }
             }
+
+            ///Calculations and display before the timer was implemented
             //account._Balance -= moneyamount;
             //account._Balance = (float)Math.Round(account._Balance, 3);
             //account2._Balance += (float)ExchangeRate(account, account2, moneyamount);
