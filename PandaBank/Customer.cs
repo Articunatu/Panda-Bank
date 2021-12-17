@@ -268,7 +268,15 @@ namespace PandaBank
                         if (depositAnswer == "JA")
                         {
                             float InsertedAmount = IntrestAmount(createAccounts);
-                            createAccounts._Balance = createAccounts._Balance + InsertedAmount;
+                            SaveCalculations(InsertedAmount, 0, null, createAccounts);
+                            SaveTranscation(InsertedAmount, createAccounts, true, "Insättning på skapat konto\t");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("Din insättning går igenom om 15 sekunder");
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine(createAccounts._Name + "\t" + createAccounts._Balance + " " + createAccounts._Currency);
                         }
                     }
                     else
@@ -280,13 +288,37 @@ namespace PandaBank
                         string depositAnswer = Console.ReadLine().ToUpper();
                         if (depositAnswer == "JA")
                         {
-                            float InsertedAmount = IntrestAmount(createAccounts);
-                            createAccounts._Balance = createAccounts._Balance + InsertedAmount;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("Skriv hur mycket pengar du vill sätta in: ");
+                            float moneyAmount = 0;
+                            do
+                            {
+                                try
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    moneyAmount = float.Parse(Console.ReadLine());
+                                    isException = false;
+                                }
+                                catch (Exception)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.Write("Ogiltigt format! Vänligen skriv in ett nytt belopp: ");
+                                    isException = true;
+                                }
+                            }
+                            while (isException);
+                            SaveCalculations(moneyAmount, 0, null, createAccounts);
+                            SaveTranscation(moneyAmount, createAccounts, true, "Insättning på skapat konto\t");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("Din insättning går igenom om 15 sekunder");
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine(createAccounts._Name + "\t" + createAccounts._Balance + " " + createAccounts._Currency);
                         }
                     }
                     ListOfAccounts.Add(createAccounts);
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine(createAccounts._Name + "\t" + createAccounts._Balance + " " + createAccounts._Currency);
                 }
                 catch (Exception)
                 {
