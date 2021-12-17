@@ -1,7 +1,7 @@
 # Panda-Bank
 Panda-Bank!
 
-The Panda-Bank is a bankbased program coded in C# in .NET.
+The Panda-Bank is a school prodject program coded in C# in .NET. It´s a program that are suppose to be like a banksystem.
 
 There are seven different classes, including the Main program class and two partial classes. 
 
