@@ -10,7 +10,7 @@ namespace PandaBank
         {
             Admin a = new Admin();
             a.AdminSetup();
-            a.userName = "Admin"; a.password = "1234";
+            a.UserName = "Admin"; a.Password = "1234";
             List<Customer> ListOfCustomers = a.ListOfCustomers;
             LoginUs(a, ListOfCustomers);
         }
@@ -50,18 +50,18 @@ namespace PandaBank
                         }
                     } while (keyPassword != ConsoleKey.Enter);
 
-                    if (userAnswer == a.userName && userPass == a.password)
+                    if (userAnswer == a.UserName && userPass == a.Password)
                     {
                         SignInAdmin(a, ListOfCustomers);
                         break;
                     }
 
-                    LoginUser result = ListOfCustomers.Find(result => result.userName == userAnswer);
-                    LoginUser result1 = ListOfCustomers.Find(result => result.password == userPass);
+                    LoginUser result = ListOfCustomers.Find(result => result.UserName == userAnswer);
+                    LoginUser result1 = ListOfCustomers.Find(result => result.Password == userPass);
                     if (result == null || result1 == null)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Fel användarnamn eller lösenord, skriv in ett nytt:");
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine("\nFel användarnamn eller lösenord, skriv in ett nytt!");
                         if (i == 2)
                         {
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -70,7 +70,7 @@ namespace PandaBank
                         }
                     }
 
-                    else if (result.userName == userAnswer && result.password == userPass)
+                    else if (result.UserName == userAnswer && result.Password == userPass)
                     {
                         Customer resultCust = (Customer)result;
                         SignInMetod(a, resultCust, ListOfCustomers);
@@ -132,9 +132,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("\n");
                 Console.WriteLine("Välkommen till PandaBanken");
-                int money;
+                int chosenOption;
                 Console.WriteLine("[1]  Visa Konton");
-                Console.WriteLine("[2]  Överför Pengar Mellan Konton");
+                Console.WriteLine("[2]  Överför Pengar Mellan Egna Konton");
                 Console.WriteLine("[3]  Överför Pengar Till Andra Användare");
                 Console.WriteLine("[4]  Skapa Konto");
                 Console.WriteLine("[5]  Sätt In Pengar");
@@ -144,10 +144,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                 Console.WriteLine("[9]  Byt lösenord");
                 Console.WriteLine("[10] Logga ut");
                 Console.Write("");
-                Int32.TryParse(Console.ReadLine(), out money);
+                Int32.TryParse(Console.ReadLine(), out chosenOption);
                 Console.WriteLine();
 
-                switch (money)
+                switch (chosenOption)
                 {
                     case 1:
                         loginUser.ShoweAccounts();
@@ -194,8 +194,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                         Console.Clear();
                         break;
                     case 9:
-                        Console.Clear();
                         loginUser.ChangePassword();
+                        Console.Clear();
                         break;
                     case 10:
                         Console.Clear();
@@ -280,7 +280,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$eeeeeee$$$$$$$$$$$$$$$$$$$$$$$$$
                         }
                     }
                 }
-
             }
             else { }
         }

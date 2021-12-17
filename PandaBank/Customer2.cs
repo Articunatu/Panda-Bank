@@ -8,15 +8,17 @@ namespace PandaBank
     {
         List<string> Transactions = new List<string>();
 
-        public void SaveTranscation(float transaction, Accounts transferAccount, bool plusOrMinus, string changedTransfer)
+        public void SaveTranscation(float moneyAmount, Accounts transferAccount, bool plusOrMinus, string changedTransfer)
         {
-            Transcation savedTransaction = new Transcation();
-            savedTransaction.TimeOfTransfer = DateTime.Now;
-            savedTransaction.PlusOrMinus = plusOrMinus;
-            savedTransaction.TransferAccount = transferAccount;
-            savedTransaction.Transaction = transaction;
-            savedTransaction.ChangedTransfer = changedTransfer;
-            savedTransaction.User = this;
+            Transcation savedTransaction = new Transcation
+            {
+                TimeOfTransfer = DateTime.Now,
+                PlusOrMinus = plusOrMinus,
+                TransferAccount = transferAccount,
+                MoneyAmount = moneyAmount,
+                ChangedTransfer = changedTransfer,
+                User = this
+            };
             BankController.queuedTransactions.Enqueue(savedTransaction);
         }
 
@@ -246,7 +248,7 @@ namespace PandaBank
                 }
             }
             
-            MoneyLimit2 = MoneyLimit2*5;
+            MoneyLimit2 *= 5;
             while (BorrowAmount > MoneyLimit2)
             {
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -292,7 +294,7 @@ namespace PandaBank
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 passwordCreated = Console.ReadLine();
             }
-            password = passwordCreated;
+            Password = passwordCreated;
         }
     }
 }

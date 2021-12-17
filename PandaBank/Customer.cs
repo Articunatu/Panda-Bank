@@ -14,8 +14,8 @@ namespace PandaBank
 
         public Customer(string _userName, string _password)
         {
-            userName = _userName;
-            password = _password;
+            UserName = _userName;
+            Password = _password;
         }
 
         public void ShoweAccounts()
@@ -31,7 +31,7 @@ namespace PandaBank
             {
                 Console.WriteLine("Du har inga konton...");
             }
-            
+
         }
 
         public void ShoweAccountsNames()
@@ -148,17 +148,17 @@ namespace PandaBank
             Console.Write("Skriv användare att skicka pengar till: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             string toUser = Console.ReadLine();
-            Customer toUser2 = ListUser.Find(u => u.userName == toUser);
+            Customer toUser2 = ListUser.Find(u => u.UserName == toUser);
             while (toUser2 == null)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Ogiltig användare! Skriv in en ny: ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 toUser = Console.ReadLine();
-                toUser2 = ListUser.Find(u => u.userName == toUser);
+                toUser2 = ListUser.Find(u => u.UserName == toUser);
             }
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"\n{toUser2.userName}s konton: ");
+            Console.WriteLine($"\n{toUser2.UserName}s konton: ");
             toUser2.ShoweAccountsNames();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Välj ett konto: ");
@@ -215,8 +215,8 @@ namespace PandaBank
             //toAccount._Balance += (float)ExchangeRate(fromAcc, toAccount, amount);
             //fromAcc.PrintInfo();
 
-            SaveTranscation(amount, fromAcc, false, $"Överföring till användare: {toUser2.userName}");
-            toUser2.SaveTranscation((float)ExchangeRate(fromAcc, toAccount, amount), toAccount, true, $"Överföring från användare: {this.userName}");
+            SaveTranscation(amount, fromAcc, false, $"Överföring till användare: {toUser2.UserName}");
+            toUser2.SaveTranscation((float)ExchangeRate(fromAcc, toAccount, amount), toAccount, true, $"Överföring från användare: {this.UserName}");
             SaveCalculations(amount, (float)ExchangeRate(fromAcc, toAccount, amount), fromAcc, toAccount);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Transaktionerna går egenom om 15 sekunder.");
@@ -251,7 +251,7 @@ namespace PandaBank
                     chooseCurrency = Console.ReadLine().ToUpper();
                     Currency currencyEnum = (Currency)Enum.Parse(typeof(Currency), chooseCurrency);
                     isException = false;
-                    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);   
+                    Accounts createAccounts = new Accounts(accountName, accountAm, chooseCurrency);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("Ska det vara ett sparkonto, skriv då JA: ");
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -299,78 +299,81 @@ namespace PandaBank
 
         public decimal ExchangeRate(Accounts firstAccount, Accounts secondAccount, float moneyAmount)
         {
-            decimal result = 0;
+            decimal result;
             decimal result1 = 0;
-                switch (firstAccount._Currency)
-                {
-                    case "SEK":
-                        if (secondAccount._Currency == "USD")
-                        {
-                            result1 = (decimal)moneyAmount * currencyChange[1];
-                        }
-                        else if (secondAccount._Currency == "GBP")
-                        {
-                            result1 = (decimal)moneyAmount * currencyChange[2];
-                        }
-                        else if (secondAccount._Currency == "EUR")
-                        {
-                            result1 = (decimal)moneyAmount * currencyChange[3];
-                        }
-                        break;
-                    case "USD":
-                        if (secondAccount._Currency == "SEK")
-                        {
-                            result = currencyChange[0] / currencyChange[1];
-                            result1 = (decimal)moneyAmount * result;
-                        }
-                        else if (secondAccount._Currency == "GBP")
-                        {
-                            result = currencyChange[1] / currencyChange[2];
-                            result1 = (decimal)moneyAmount / result;
-                        }
-                        else if (secondAccount._Currency == "EUR")
-                        {
-                            result = currencyChange[1] / currencyChange[3];
-                            result1 = (decimal)moneyAmount / result;
-                        }
-                        break;
-                    case "GBP":
-                        if (secondAccount._Currency == "SEK")
-                        {
-                            result = currencyChange[0] / currencyChange[2];
-                            result1 = (decimal)moneyAmount * result;
-                        }
-                        else if (secondAccount._Currency == "USD")
-                        {
-                            result = currencyChange[2] / currencyChange[1];
-                            result1 = (decimal)moneyAmount / result;
-                        }
-                        else if (secondAccount._Currency == "EUR")
-                        {
-                            result = currencyChange[2] / currencyChange[3];
-                            result1 = (decimal)moneyAmount / result;
-                        }
-                        break;
-                    case "EUR":
-                        if (secondAccount._Currency == "SEK")
-                        {
-                            result = currencyChange[0] / currencyChange[3];
-                            result1 = (decimal)moneyAmount * result;
-                        }
-                        else if (secondAccount._Currency == "USD")
-                        {
-                            result = currencyChange[3] / currencyChange[1];
-                            result1 = (decimal)moneyAmount / result;
-                        }
-                        else if (secondAccount._Currency == "GBP")
-                        {
-                            result = currencyChange[3] / currencyChange[2];
-                            result1 = (decimal)moneyAmount / result;
-                        }
-                        break;
-                    default:
-                        break;
-                }
+            switch (firstAccount._Currency)
+            {
+                case "SEK":
+                    if (secondAccount._Currency == "USD")
+                    {
+                        result = currencyChange[1] / currencyChange[0];
+                        result1 = (decimal)moneyAmount * result;
+                    }
+                    else if (secondAccount._Currency == "GBP")
+                    {
+                        result = currencyChange[2] / currencyChange[0];
+                        result1 = (decimal)moneyAmount * result;
+                    }
+                    else if (secondAccount._Currency == "EUR")
+                    {
+                        result = currencyChange[3] / currencyChange[0];
+                        result1 = (decimal)moneyAmount * result;
+                    }
+                    break;
+                case "USD":
+                    if (secondAccount._Currency == "SEK")
+                    {
+                        result = currencyChange[0] / currencyChange[1];
+                        result1 = (decimal)moneyAmount * result;
+                    }
+                    else if (secondAccount._Currency == "GBP")
+                    {
+                        result = currencyChange[2] / currencyChange[1];
+                        result1 = (decimal)moneyAmount / result;
+                    }
+                    else if (secondAccount._Currency == "EUR")
+                    {
+                        result = currencyChange[3] / currencyChange[1];
+                        result1 = (decimal)moneyAmount / result;
+                    }
+                    break;
+                case "GBP":
+                    if (secondAccount._Currency == "SEK")
+                    {
+                        result = currencyChange[0] / currencyChange[2];
+                        result1 = (decimal)moneyAmount * result;
+                    }
+                    else if (secondAccount._Currency == "USD")
+                    {
+                        result = currencyChange[1] / currencyChange[2];
+                        result1 = (decimal)moneyAmount / result;
+                    }
+                    else if (secondAccount._Currency == "EUR")
+                    {
+                        result = currencyChange[3] / currencyChange[2];
+                        result1 = (decimal)moneyAmount / result;
+                    }
+                    break;
+                case "EUR":
+                    if (secondAccount._Currency == "SEK")
+                    {
+                        result = currencyChange[0] / currencyChange[3];
+                        result1 = (decimal)moneyAmount * result;
+                    }
+                    else if (secondAccount._Currency == "USD")
+                    {
+                        result = currencyChange[1] / currencyChange[3];
+                        result1 = (decimal)moneyAmount / result;
+                    }
+                    else if (secondAccount._Currency == "GBP")
+                    {
+                        result = currencyChange[2] / currencyChange[3];
+                        result1 = (decimal)moneyAmount / result;
+                    }
+                    break;
+                default:
+                    break;
+            }
             if (firstAccount._Currency == secondAccount._Currency)
             {
                 return (decimal)moneyAmount;

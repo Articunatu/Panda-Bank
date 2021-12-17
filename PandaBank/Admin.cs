@@ -36,7 +36,7 @@ namespace PandaBank
         {
             foreach (var customer in ListOfCustomers)
             {
-                Console.WriteLine("Användare: " + customer.userName + ", Antal konton: " + customer.ListOfAccounts.Count);
+                Console.WriteLine("Användare: " + customer.UserName + ", Antal konton: " + customer.ListOfAccounts.Count);
             }
         }
 
@@ -72,7 +72,7 @@ namespace PandaBank
             Customer createdCustomer = new Customer(nameCreated, passwordCreated);
             ListOfCustomers.Add(createdCustomer);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Du har lagt till följande användare: " + createdCustomer.userName + "\nMed lösenordet: " + createdCustomer.password);
+            Console.WriteLine("Du har lagt till följande användare: " + createdCustomer.UserName + "\nMed lösenordet: " + createdCustomer.Password);
         }
 
         public void UpdateCurrency()
