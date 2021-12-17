@@ -1,14 +1,8 @@
-# Panda-Banken
- /$$$$$$$                            /$$                /$$$$$$$                      /$$                          
-| $$__  $$                           |$$               | $$__  $$                    | $$                          
-| $$   |$$   /$$$$$$  /$$$$$$$   /$$$$$$$  /$$$$$$     | $$  |$$   /$$$$$$  /$$$$$$$ | $$   /$$  /$$$$$$  /$$$$$$$ 
-| $$$$$$$/|  ___  $$| $$__  $$ /$$__  $$ | ____ $$     | $$$$$$$  | ____ $$| $$__  $$| $$  /$$/ /$$__  $$| $$__  $$
-| $$____ /  /$$$$$$$| $$  | $$| $$  | $$  /$$$$$$$     | $$__  $$  /$$$$$$$| $$  | $$| $$$$$$/ | $$$$$$$$| $$  | $$
-| $$       /$$__  $$| $$  | $$| $$  | $$ /$$__  $$     | $$  | $$ /$$__  $$| $$  | $$| $$_  $$ | $$_____/| $$  | $$
-| $$       | $$$$$$$| $$  | $$|  $$$$$$$|  $$$$$$$     | $$$$$$$/|  $$$$$$$| $$  | $$| $$ |  $$|  $$$$$$$| $$  | $$
-|__/       |_______/ |__/  |__/ |_______/ |_______/    |_______/  |_______/|__/  |__/|__/  |__/ |_______/|__/  |__/
+# Panda-Bank
 
-The Panda-Bank is a school prodject program coded in C# in .NET. It´s a program that are suppose to be like a banksystem.
+
+
+The Panda-Bank is a school project program coded in C# in .NET. It´s a program that are suppose to be like a banksystem.
 
 There are seven different classes, including the Main program class and two partial classes. 
 
