@@ -1,9 +1,4 @@
 # Panda-Bank
-
-https://trello.com/b/MATS4rhJ/gruppprojekt
-
-https://lucid.app/lucidchart/57bebeee-fdc6-4bce-b75e-869f5b7751cc/edit?invitationId=inv_a81b3d19-a3c3-4718-b67b-3611e985996d
-
 Panda-Bank!
 
 The Panda-Bank is a bankbased program coded in C# in .NET.
@@ -25,3 +20,10 @@ Accounts: Here we keep our variabels for Name, Balance, Currency and IsSavings i
 Customer: Inherits from the base class and is also a partial class. Here is where we invoke the list of Accounts, though the value is added in the admin class. We keep the ShowAccounts method, where all the currently logged in users' accounts are printed out. The TransferAccounts method, where one can transfer money from one account to another. The TransferMoneyToUser method, where one can transfer money to another user. The enum Currency, that holds the four different currencies we currently use; SEK, USD, GBP and EUR. The CreateAccount method, where one can create a new account, choose currency for said account and decide if the account willl be a normal one or a savings account. And lastly we keep the ExchangeRate method, where if one tranfers money between accounts with different currencies, the equivalent amount will be transfered conditionally with the currency value. 
 
 Customer2: Inherits from the base class and is the other partial class. Here is where we have the list of Transactions, also connected with the timer. We aditionally keep the SaveTransaction, the SaveCalculations and the ListTransaction methods that also are involved with the timer function. The other methods kept in this class are; ShowTransactions which shows all the made transactions, the obsolete CreateSavingsAccount which was added into the CreateAccount method, DepositMoney which allows the user to deposit money and see the interset amount they'll have in a year, the WithdrawMoney method, the InterestMoney method, the Loan method which allows the user to take out a loan five times their combined accounts balance and then informs of how much one will have to pay back yearly, and lastly we have the ChangePassword method where the user can change their password with specific limitations; has to have eight characters whereas at least one has to be a number and a letter.
+
+
+Here is our board, we used a mixture of Kanban, Scrum and XP of the agile Workmethods.
+https://trello.com/b/MATS4rhJ/gruppprojekt
+
+Here is our UML chart, where we have a rough layout of how the code was to be built, meaning where all the methods where to be placed. 
+https://lucid.app/lucidchart/57bebeee-fdc6-4bce-b75e-869f5b7751cc/edit?invitationId=inv_a81b3d19-a3c3-4718-b67b-3611e985996d
